@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCQ Answer Checker</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body {
+            background: #f1f5f9;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .sidebar {
+            background: #1e1b4b;
+            min-height: 100vh;
+            width: 230px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 100;
+        }
+
+        .sidebar .logo {
+            padding: 22px 18px;
+            border-bottom: 1px solid rgba(255, 255, 255, .1);
+        }
+
+        .sidebar .logo h5 {
+            color: #fff;
+            margin: 0;
+            font-weight: 700;
+        }
+
+        .sidebar .logo small {
+            color: #a5b4fc;
+        }
+
+        .nav-item-side {
+            color: rgba(255, 255, 255, .7);
+            padding: 12px 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            border-left: 3px solid transparent;
+            transition: .2s;
+        }
+
+        .nav-item-side:hover {
+            background: rgba(255, 255, 255, .07);
+            color: #fff;
+        }
+
+        .nav-item-side.active {
+            color: #fff;
+            background: rgba(255, 255, 255, .1);
+            border-left-color: #818cf8;
+        }
+
+        .main {
+            margin-left: 230px;
+            padding: 28px;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .card-box {
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, .07);
+            padding: 22px;
+        }
+
+        /* Admin answer options */
+        .opt-pill {
+            cursor: pointer;
+            padding: 5px 14px;
+            border-radius: 20px;
+            border: 2px solid #e2e8f0;
+            font-weight: 700;
+            font-size: 13px;
+            transition: .15s;
+            user-select: none;
+        }
+
+        .opt-pill:hover {
+            border-color: #4f46e5;
+            color: #4f46e5;
+        }
+
+        .opt-pill.active {
+            background: #4f46e5;
+            border-color: #4f46e5;
+            color: #fff;
+        }
+
+        /* Checker answer buttons */
+        .ans-btn {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 2px solid #cbd5e1;
+            background: #fff;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: .15s;
+            flex-shrink: 0;
+        }
+
+        .ans-btn:hover {
+            border-color: #4f46e5;
+            color: #4f46e5;
+        }
+
+        .ans-btn.sel {
+            background: #4f46e5;
+            border-color: #4f46e5;
+            color: #fff;
+        }
+
+        .ans-btn.ok {
+            background: #10b981;
+            border-color: #10b981;
+            color: #fff;
+        }
+
+        .ans-btn.bad {
+            background: #ef4444;
+            border-color: #ef4444;
+            color: #fff;
+        }
+
+        .ans-btn.miss {
+            background: #f59e0b;
+            border-color: #f59e0b;
+            color: #fff;
+        }
+
+        .q-row {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 9px 12px;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            border: 2px solid transparent;
+        }
+
+        .q-row.ok {
+            border-color: #10b981;
+            background: #ecfdf5;
+        }
+
+        .q-row.bad {
+            border-color: #ef4444;
+            background: #fef2f2;
+        }
+
+        /* Camera */
+        #videoEl {
+            width: 100%;
+            border-radius: 12px;
+            background: #000;
+            display: none;
+            max-height: 360px;
+            object-fit: cover;
+        }
+
+        #canvasEl {
+            width: 100%;
+            border-radius: 12px;
+            display: none;
+        }
+
+        .cam-placeholder {
+            background: #1e1b4b;
+            border-radius: 12px;
+            height: 220px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #a5b4fc;
+            gap: 8px;
+        }
+
+        /* Score ring */
+        .score-ring {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 8px solid;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .toast-wrap {
+            position: fixed;
+            top: 18px;
+            right: 18px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .toast-item {
+            padding: 11px 18px;
+            border-radius: 10px;
+            color: #fff;
+            font-weight: 500;
+            font-size: 14px;
+            max-width: 320px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, .18);
+            animation: tIn .25s;
+        }
+
+        @keyframes tIn {
+            from {
+                opacity: 0;
+                transform: translateX(30px)
+            }
+
+            to {
+                opacity: 1;
+                transform: none
+            }
+        }
+
+        @media(max-width:768px) {
+            .sidebar {
+                width: 58px;
+            }
+
+            .sidebar .logo h5,
+            .sidebar .logo small,
+            .nav-item-side span {
+                display: none;
+            }
+
+            .main {
+                margin-left: 58px;
+                padding: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="toast-wrap" id="toastWrap"></div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo">
+            <h5><i class="bi bi-check2-circle me-2"></i>MCQ Checker</h5>
+            <small>Answer Sheet Scanner</small>
+        </div>
+        <div class="mt-2">
+            <div class="nav-item-side active" id="nav-admin" onclick="showPage('admin')">
+                <i class="bi bi-gear-fill"></i><span>Admin Setup</span>
+            </div>
+            <div class="nav-item-side" id="nav-checker" onclick="showPage('checker')">
+                <i class="bi bi-camera-fill"></i><span>Check Answers</span>
+            </div>
+            <div class="nav-item-side" id="nav-results" onclick="showPage('results')">
+                <i class="bi bi-bar-chart-fill"></i><span>Results</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div class="main">
+
+        <!-- ADMIN -->
+        <div class="page active" id="page-admin">
+            <h4 class="fw-bold mb-1">Admin Setup</h4>
+            <p class="text-muted mb-4">Set the correct answers for your exam paper</p>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card-box">
+                        <h6 class="fw-bold mb-3"><i class="bi bi-sliders me-2 text-primary"></i>Paper Settings</h6>
+                        <label class="form-label fw-semibold small">Paper Title</label>
+                        <input id="inp-title" class="form-control mb-3" value="MCQ Exam" placeholder="Paper title">
+                        <label class="form-label fw-semibold small">Number of Questions</label>
+                        <div class="input-group mb-3">
+                            <input id="inp-count" type="number" class="form-control" value="10" min="1" max="100">
+                            <button class="btn btn-primary" onclick="generateAdminGrid()">
+                                <i class="bi bi-arrow-clockwise"></i> Generate
+                            </button>
+                        </div>
+                        <label class="form-label fw-semibold small">Options per Question</label>
+                        <select id="inp-opts" class="form-select mb-3">
+                            <option value="4" selected>4 options (A B C D)</option>
+                            <option value="5">5 options (A B C D E)</option>
+                        </select>
+                        <button class="btn btn-success w-100 mb-2" onclick="saveKey()">
+                            <i class="bi bi-floppy-fill me-2"></i>Save Answer Key
+                        </button>
+                        <button class="btn btn-outline-secondary w-100 mb-2" onclick="bulkSelect()">
+                            <i class="bi bi-check-all me-2"></i>Set All to A
+                        </button>
+                        <button class="btn btn-outline-danger w-100" onclick="clearKey()">
+                            <i class="bi bi-trash me-2"></i>Clear All
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="card-box">
+                        <h6 class="fw-bold mb-3"><i class="bi bi-list-ol me-2 text-primary"></i>Answer Key</h6>
+                        <div id="admin-grid" style="max-height:520px;overflow-y:auto;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CHECKER -->
+        <div class="page" id="page-checker">
+            <h4 class="fw-bold mb-1">Check Answer Sheet</h4>
+            <p class="text-muted mb-4">Use camera to view the sheet, then click the bubbles you see marked</p>
+            <div class="row g-4">
+                <div class="col-lg-5">
+                    <div class="card-box">
+                        <h6 class="fw-bold mb-3"><i class="bi bi-camera me-2 text-primary"></i>Camera</h6>
+                        <div id="cam-placeholder" class="cam-placeholder">
+                            <i class="bi bi-camera-video-off" style="font-size:2.2rem;"></i>
+                            <span>Camera not started</span>
+                            <small>Click Start Camera below</small>
+                        </div>
+                        <video id="videoEl" autoplay playsinline muted></video>
+                        <canvas id="canvasEl"></canvas>
+                        <div class="d-flex gap-2 mt-3">
+                            <button id="btn-cam" class="btn btn-primary flex-grow-1" onclick="toggleCamera()">
+                                <i class="bi bi-camera-video me-1"></i>Start Camera
+                            </button>
+                            <button class="btn btn-outline-secondary" onclick="takeSnapshot()">
+                                <i class="bi bi-camera"></i> Snap
+                            </button>
+                        </div>
+                        <div class="mt-3 d-flex gap-3 small">
+                            <span><span
+                                    style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#10b981;"></span>
+                                Correct</span>
+                            <span><span
+                                    style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#ef4444;"></span>
+                                Wrong</span>
+                            <span><span
+                                    style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#f59e0b;"></span>
+                                Missed</span>
+                            <span><span
+                                    style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#4f46e5;"></span>
+                                Selected</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="card-box">
+                        <div class="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-2">
+                            <h6 class="fw-bold mb-0"><i class="bi bi-pencil-square me-2 text-primary"></i>Student
+                                Answers</h6>
+                            <div class="d-flex gap-2">
+                                <input id="inp-student" class="form-control form-control-sm" placeholder="Student name"
+                                    style="width:150px;">
+                                <button class="btn btn-sm btn-outline-secondary" onclick="resetChecker()">Reset</button>
+                            </div>
+                        </div>
+                        <div id="checker-grid" style="max-height:420px;overflow-y:auto;"></div>
+                        <div class="d-flex gap-2 mt-3">
+                            <button class="btn btn-primary flex-grow-1" onclick="checkAnswers()">
+                                <i class="bi bi-check2-all me-2"></i>Check All Answers
+                            </button>
+                            <button class="btn btn-success" onclick="saveResult()">
+                                <i class="bi bi-save me-2"></i>Save
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RESULTS -->
+        <div class="page" id="page-results">
+            <div class="d-flex align-items-center justify-content-between mb-4">
+                <div>
+                    <h4 class="fw-bold mb-1">Results History</h4>
+                    <p class="text-muted mb-0">All saved exam results</p>
+                </div>
+                <button class="btn btn-outline-danger btn-sm" onclick="clearResults()">
+                    <i class="bi bi-trash me-1"></i>Clear All
+                </button>
+            </div>
+            <div id="results-list"></div>
+        </div>
+
+    </div><!-- /main -->
+
+    <script>
+        // ── State ──────────────────────────────────────────────────────────────
+        const OPTS = ['A', 'B', 'C', 'D', 'E'];
+        let answerKey = JSON.parse(localStorage.getItem('mcq_key') || '[]');
+        let savedResults = JSON.parse(localStorage.getItem('mcq_results') || '[]');
+        let studentAnswers = [];
+        let stream = null;
+        let camOn = false;
+
+        // ── Navigation ─────────────────────────────────────────────────────────
+        function showPage(name) {
+            ['admin', 'checker', 'results'].forEach(p => {
+                document.getElementById('page-' + p).classList.toggle('active', p === name);
+                document.getElementById('nav-' + p).classList.toggle('active', p === name);
+            });
+            if (name === 'checker') buildCheckerGrid();
+            if (name === 'results') buildResults();
+        }
+
+        // ── Admin ──────────────────────────────────────────────────────────────
+        function generateAdminGrid() {
+            const n = Math.min(100, Math.max(1, parseInt(document.getElementById('inp-count').value) || 10));
+            const nOpt = parseInt(document.getElementById('inp-opts').value);
+            // keep existing answers when regenerating
+            const old = answerKey.slice();
+            answerKey = Array.from({ length: n }, (_, i) => ({
+                q: i + 1,
+                ans: old[i]?.ans || null
+            }));
+            renderAdminGrid(nOpt);
+        }
+
+        function renderAdminGrid(nOpt) {
+            nOpt = nOpt || parseInt(document.getElementById('inp-opts').value) || 4;
+            const opts = OPTS.slice(0, nOpt);
+            const g = document.getElementById('admin-grid');
+            g.innerHTML = answerKey.map((q, i) => `
+    <div style="background:#f8fafc;border-radius:10px;padding:9px 12px;margin-bottom:6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+      <span class="fw-bold text-muted" style="min-width:32px;font-size:14px;">Q${q.q}</span>
+      ${opts.map(o => `
+        <span class="opt-pill ${q.ans === o ? 'active' : ''}"
+              id="ap-${i}-${o}"
+              onclick="setKey(${i},'${o}')">${o}</span>
+      `).join('')}
+      <span class="ms-auto badge ${q.ans ? 'bg-success' : 'bg-secondary'}" id="abadge-${i}">
+        ${q.ans || '—'}
+      </span>
+    </div>`).join('');
+        }
+
+        function setKey(qi, opt) {
+            answerKey[qi].ans = answerKey[qi].ans === opt ? null : opt; // toggle
+            const nOpt = parseInt(document.getElementById('inp-opts').value) || 4;
+            OPTS.slice(0, nOpt).forEach(o => {
+                const el = document.getElementById(`ap-${qi}-${o}`);
+                if (el) el.className = 'opt-pill' + (answerKey[qi].ans === o ? ' active' : '');
+            });
+            const badge = document.getElementById(`abadge-${qi}`);
+            if (badge) {
+                badge.textContent = answerKey[qi].ans || '—';
+                badge.className = 'ms-auto badge ' + (answerKey[qi].ans ? 'bg-success' : 'bg-secondary');
+            }
+        }
+
+        function saveKey() {
+            if (!answerKey.length) { toast('Generate questions first!', 'warn'); return; }
+            const missing = answerKey.filter(q => !q.ans).length;
+            if (missing) toast(`${missing} question(s) still have no answer`, 'warn');
+            const title = document.getElementById('inp-title').value || 'MCQ Exam';
+            localStorage.setItem('mcq_key', JSON.stringify(answerKey));
+            localStorage.setItem('mcq_title', title);
+            toast('Answer key saved ✓', 'ok');
+        }
+
+        function bulkSelect() {
+            answerKey.forEach((_, i) => { answerKey[i].ans = 'A'; });
+            renderAdminGrid();
+        }
+
+        function clearKey() {
+            if (!confirm('Clear all questions?')) return;
+            answerKey = [];
+            localStorage.removeItem('mcq_key');
+            document.getElementById('admin-grid').innerHTML = '';
+            toast('Cleared', 'info');
+        }
+
+        // ── Checker ────────────────────────────────────────────────────────────
+        function buildCheckerGrid() {
+            answerKey = JSON.parse(localStorage.getItem('mcq_key') || '[]');
+            studentAnswers = Array(answerKey.length).fill(null);
+            const g = document.getElementById('checker-grid');
+            if (!answerKey.length) {
+                g.innerHTML = `<div class="text-center text-muted py-5">
+      <i class="bi bi-exclamation-circle fs-2"></i>
+      <p class="mt-2">No answer key found. Set it up in Admin Setup.</p></div>`;
+                return;
+            }
+            g.innerHTML = answerKey.map((q, i) => `
+    <div class="q-row" id="qrow-${i}">
+      <span class="fw-bold text-muted" style="min-width:30px;font-size:14px;">Q${q.q}</span>
+      ${OPTS.slice(0, 5).map(o => `
+        <button class="ans-btn" id="sb-${i}-${o}" onclick="pickAnswer(${i},'${o}')">${o}</button>
+      `).join('')}
+      <span class="ms-auto small fw-bold" id="qmark-${i}"></span>
+    </div>`).join('');
+        }
+
+        function pickAnswer(qi, opt) {
+            // Toggle off if already selected
+            if (studentAnswers[qi] === opt) {
+                studentAnswers[qi] = null;
+            } else {
+                studentAnswers[qi] = opt;
+            }
+            // Refresh button styles for that row
+            OPTS.forEach(o => {
+                const btn = document.getElementById(`sb-${qi}-${o}`);
+                if (!btn) return;
+                btn.className = 'ans-btn' + (studentAnswers[qi] === o ? ' sel' : '');
+            });
+        }
+
+        function checkAnswers() {
+            if (!answerKey.length) { toast('No answer key loaded!', 'warn'); return; }
+            let correct = 0, wrong = 0, blank = 0;
+
+            answerKey.forEach((q, i) => {
+                const sa = studentAnswers[i];
+                const row = document.getElementById(`qrow-${i}`);
+                const mark = document.getElementById(`qmark-${i}`);
+
+                // Style every button for this row
+                OPTS.forEach(o => {
+                    const btn = document.getElementById(`sb-${i}-${o}`);
+                    if (!btn) return;
+                    if (o === q.ans && o === sa) btn.className = 'ans-btn ok';   // correct pick
+                    else if (o === sa && sa !== q.ans) btn.className = 'ans-btn bad';  // wrong pick
+                    else if (o === q.ans && !sa) btn.className = 'ans-btn miss'; // missed correct
+                    else btn.className = 'ans-btn';
+                });
+
+                if (!sa) {
+                    row.className = 'q-row bad';
+                    mark.innerHTML = `<span class="text-warning">— (${q.ans})</span>`;
+                    blank++;
+                } else if (sa === q.ans) {
+                    row.className = 'q-row ok';
+                    mark.innerHTML = `<i class="bi bi-check-circle-fill text-success"></i>`;
+                    correct++;
+                } else {
+                    row.className = 'q-row bad';
+                    mark.innerHTML = `<span class="text-danger">${sa} ≠ ${q.ans}</span>`;
+                    wrong++;
+                }
+            });
+
+            const total = answerKey.length;
+            const pct = Math.round(correct / total * 100);
+            toast(`✅ ${correct}/${total} correct (${pct}%)  ❌ ${wrong} wrong  ⬜ ${blank} blank`,
+                pct >= 50 ? 'ok' : 'bad', 5000);
+        }
+
+        function resetChecker() {
+            buildCheckerGrid();
+            document.getElementById('inp-student').value = '';
+        }
+
+        function saveResult() {
+            checkAnswers();
+            const total = answerKey.length;
+            const correct = answerKey.filter((q, i) => studentAnswers[i] === q.ans).length;
+            const name = document.getElementById('inp-student').value.trim() || 'Anonymous';
+            savedResults.unshift({
+                id: Date.now(),
+                name,
+                paper: localStorage.getItem('mcq_title') || 'MCQ Exam',
+                correct, total,
+                pct: Math.round(correct / total * 100),
+                answers: [...studentAnswers],
+                key: JSON.parse(JSON.stringify(answerKey)),
+                date: new Date().toLocaleString()
+            });
+            localStorage.setItem('mcq_results', JSON.stringify(savedResults));
+            toast(`Result saved for ${name}!`, 'ok');
+        }
+
+        // ── Camera ─────────────────────────────────────────────────────────────
+        async function toggleCamera() {
+            if (camOn) {
+                stopCamera();
+            } else {
+                await startCamera();
+            }
+        }
+
+        async function startCamera() {
+            try {
+                stream = await navigator.mediaDevices.getUserMedia({
+                    video: { facingMode: 'environment', width: { ideal: 1280 }, height: { ideal: 720 } }
+                });
+                const vid = document.getElementById('videoEl');
+                vid.srcObject = stream;
+                vid.style.display = 'block';
+                document.getElementById('canvasEl').style.display = 'none';
+                document.getElementById('cam-placeholder').style.display = 'none';
+                document.getElementById('btn-cam').innerHTML = '<i class="bi bi-camera-video-off me-1"></i>Stop Camera';
+                document.getElementById('btn-cam').className = 'btn btn-danger flex-grow-1';
+                camOn = true;
+            } catch (e) {
+                toast('Camera access denied or unavailable', 'bad');
+            }
+        }
+
+        function stopCamera() {
+            if (stream) { stream.getTracks().forEach(t => t.stop()); stream = null; }
+            document.getElementById('videoEl').style.display = 'none';
+            document.getElementById('cam-placeholder').style.display = 'flex';
+            document.getElementById('btn-cam').innerHTML = '<i class="bi bi-camera-video me-1"></i>Start Camera';
+            document.getElementById('btn-cam').className = 'btn btn-primary flex-grow-1';
+            camOn = false;
+        }
+
+        function takeSnapshot() {
+            const vid = document.getElementById('videoEl');
+            if (!camOn) { toast('Start the camera first!', 'warn'); return; }
+            const cv = document.getElementById('canvasEl');
+            cv.width = vid.videoWidth;
+            cv.height = vid.videoHeight;
+            cv.getContext('2d').drawImage(vid, 0, 0);
+            vid.style.display = 'none';
+            cv.style.display = 'block';
+            stopCamera();
+            toast('Snapshot captured! Mark the answers below.', 'ok');
+        }
+
+        // ── Results ────────────────────────────────────────────────────────────
+        function buildResults() {
+            savedResults = JSON.parse(localStorage.getItem('mcq_results') || '[]');
+            const c = document.getElementById('results-list');
+            if (!savedResults.length) {
+                c.innerHTML = `<div class="card-box text-center text-muted py-5">
+      <i class="bi bi-inbox fs-1"></i><p class="mt-3">No results yet.</p></div>`;
+                return;
+            }
+            c.innerHTML = savedResults.map((r, idx) => {
+                const col = r.pct >= 75 ? '#10b981' : r.pct >= 50 ? '#f59e0b' : '#ef4444';
+                const grade = r.pct >= 75 ? 'Pass' : r.pct >= 50 ? 'Average' : 'Fail';
+                return `
+    <div class="card-box mb-3">
+      <div class="d-flex align-items-center gap-4 flex-wrap">
+        <div class="score-ring" style="border-color:${col};color:${col};">
+          <span style="font-size:1.7rem;font-weight:800;">${r.pct}%</span>
+          <small style="font-size:11px;">${grade}</small>
+        </div>
+        <div class="flex-grow-1">
+          <h5 class="fw-bold mb-1">${r.name}</h5>
+          <div class="text-muted small mb-2">${r.paper} &bull; ${r.date}</div>
+          <div class="d-flex gap-2 flex-wrap mb-2">
+            <span class="badge bg-success">${r.correct} Correct</span>
+            <span class="badge bg-danger">${r.total - r.correct} Wrong</span>
+            <span class="badge bg-secondary">${r.total} Total</span>
+          </div>
+          <div class="progress" style="height:7px;">
+            <div class="progress-bar" style="width:${r.pct}%;background:${col};"></div>
+          </div>
+        </div>
+        <button class="btn btn-sm btn-outline-primary" onclick="toggleDetail(${idx})">
+          <i class="bi bi-eye me-1"></i>Detail
+        </button>
+      </div>
+      <div id="det-${idx}" style="display:none;" class="mt-3 pt-3 border-top">
+        <div class="d-flex flex-wrap gap-2">
+          ${r.key.map((q, i) => {
+                    const sa = r.answers[i];
+                    const ok = sa === q.ans;
+                    return `<div class="text-center" style="min-width:52px;">
+              <div class="small text-muted">Q${q.q}</div>
+              <div style="width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+                   font-weight:700;font-size:13px;margin:2px auto;
+                   background:${ok ? '#10b981' : '#ef4444'};color:#fff;">${sa || '—'}</div>
+              <div class="small ${ok ? 'text-success' : 'text-danger'}">${ok ? '✓' : q.ans}</div>
+            </div>`;
+                }).join('')}
+        </div>
+      </div>
+    </div>`;
+            }).join('');
+        }
+
+        function toggleDetail(idx) {
+            const d = document.getElementById(`det-${idx}`);
+            d.style.display = d.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function clearResults() {
+            if (!confirm('Delete all results?')) return;
+            savedResults = [];
+            localStorage.removeItem('mcq_results');
+            buildResults();
+            toast('All results cleared', 'info');
+        }
+
+        // ── Toast ──────────────────────────────────────────────────────────────
+        function toast(msg, type = 'info', dur = 3200) {
+            const colors = { ok: '#10b981', bad: '#ef4444', warn: '#f59e0b', info: '#6366f1' };
+            const el = document.createElement('div');
+            el.className = 'toast-item';
+            el.style.background = colors[type] || '#333';
+            el.textContent = msg;
+            document.getElementById('toastWrap').appendChild(el);
+            setTimeout(() => el.remove(), dur);
+        }
+
+        // ── Init ───────────────────────────────────────────────────────────────
+        (function init() {
+            if (answerKey.length) {
+                document.getElementById('inp-title').value = localStorage.getItem('mcq_title') || 'MCQ Exam';
+                document.getElementById('inp-count').value = answerKey.length;
+                renderAdminGrid();
+                toast(`Loaded saved key: ${answerKey.length} questions`, 'info');
+            } else {
+                generateAdminGrid();
+            }
+        })();
+    </script>
+</body>
+
+</html>

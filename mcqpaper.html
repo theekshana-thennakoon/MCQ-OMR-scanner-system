@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCQ Answer Sheet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #e5e7eb;
+            padding: 20px;
+        }
+
+        .controls {
+            background: #1e1b4b;
+            color: #fff;
+            border-radius: 12px;
+            padding: 18px 24px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .controls h5 {
+            margin: 0;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .controls label {
+            font-size: 13px;
+            color: #a5b4fc;
+        }
+
+        .controls input,
+        .controls select {
+            padding: 6px 10px;
+            border-radius: 8px;
+            border: none;
+            font-size: 13px;
+            width: 110px;
+        }
+
+        .controls button {
+            padding: 8px 18px;
+            border-radius: 8px;
+            border: none;
+            background: #818cf8;
+            color: #fff;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .controls button:hover {
+            background: #6366f1;
+        }
+
+        .btn-print {
+            background: #10b981 !important;
+        }
+
+        /* Sheet */
+        .sheet {
+            background: #fff;
+            width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto;
+            padding: 14mm 14mm 10mm;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, .15);
+            border-radius: 4px;
+        }
+
+        /* Header */
+        .header {
+            border: 2.5px solid #000;
+            border-radius: 6px;
+            padding: 10px 14px;
+            margin-bottom: 10px;
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .logo-box {
+            width: 54px;
+            height: 54px;
+            border: 2px solid #000;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: 900;
+            color: #1e1b4b;
+            flex-shrink: 0;
+        }
+
+        .header-title {
+            flex-grow: 1;
+        }
+
+        .header-title h2 {
+            font-size: 17px;
+            font-weight: 900;
+            letter-spacing: .5px;
+        }
+
+        .header-title h3 {
+            font-size: 13px;
+            font-weight: 700;
+            color: #444;
+            margin-top: 2px;
+        }
+
+        .info-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 8px;
+        }
+
+        .info-field {
+            border-bottom: 1.5px solid #000;
+            padding: 3px 0;
+        }
+
+        .info-field label {
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            color: #666;
+            display: block;
+        }
+
+        .info-field .line {
+            height: 18px;
+        }
+
+        /* Instructions */
+        .instructions {
+            border: 1.5px solid #000;
+            border-radius: 4px;
+            padding: 6px 10px;
+            margin-bottom: 10px;
+            background: #fffbeb;
+        }
+
+        .instructions p {
+            font-size: 9.5px;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .instructions strong {
+            font-size: 10px;
+        }
+
+        /* Marking example */
+        .example {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 10px;
+            font-size: 9.5px;
+            padding: 5px 10px;
+            border: 1px dashed #999;
+            border-radius: 4px;
+        }
+
+        .bubble-ex {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 1.5px solid #333;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 9px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .bubble-ex.filled {
+            background: #000;
+            color: #fff;
+            border-color: #000;
+        }
+
+        .bubble-ex.cross {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bubble-ex.cross::after {
+            content: '✗';
+            color: red;
+            font-size: 12px;
+        }
+
+        /* Answer grid */
+        .section-title {
+            font-size: 10px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 3px;
+            margin-bottom: 8px;
+            margin-top: 4px;
+        }
+
+        .grid-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0 20px;
+        }
+
+        .q-row {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 3px 0;
+            border-bottom: 1px dotted #ccc;
+        }
+
+        .q-num {
+            font-size: 10px;
+            font-weight: 700;
+            min-width: 26px;
+            text-align: right;
+        }
+
+        .bubble {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            border: 1.5px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 9.5px;
+            font-weight: 700;
+            flex-shrink: 0;
+            cursor: default;
+        }
+
+        .opt-label {
+            font-size: 9px;
+            color: #555;
+            margin-left: 1px;
+        }
+
+        /* Score box */
+        .score-section {
+            margin-top: 12px;
+            border: 2px solid #000;
+            border-radius: 6px;
+            display: flex;
+            overflow: hidden;
+        }
+
+        .score-box {
+            flex: 1;
+            padding: 7px 10px;
+            border-right: 1.5px solid #000;
+        }
+
+        .score-box:last-child {
+            border-right: none;
+        }
+
+        .score-box label {
+            font-size: 8.5px;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            color: #666;
+            display: block;
+        }
+
+        .score-box .val {
+            height: 20px;
+            border-bottom: 1.5px solid #000;
+            margin-top: 4px;
+        }
+
+        /* Barcode placeholder */
+        .barcode {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .barcode-lines {
+            display: flex;
+            gap: 2px;
+            justify-content: center;
+            align-items: flex-end;
+            height: 32px;
+        }
+
+        .barcode-lines span {
+            background: #000;
+            width: 2px;
+        }
+
+        .barcode-lines span:nth-child(even) {
+            height: 100%;
+        }
+
+        .barcode-lines span:nth-child(odd) {
+            height: 70%;
+        }
+
+        .barcode-lines span:nth-child(3n) {
+            height: 85%;
+            width: 3px;
+        }
+
+        .barcode-lines span:nth-child(5n) {
+            width: 1px;
+        }
+
+        .barcode small {
+            font-size: 8px;
+            letter-spacing: 2px;
+            display: block;
+            margin-top: 3px;
+        }
+
+        /* Footer */
+        .sheet-footer {
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 8px;
+            color: #888;
+            border-top: 1px solid #ddd;
+            padding-top: 6px;
+        }
+
+        @media print {
+            body {
+                background: #fff;
+                padding: 0;
+            }
+
+            .controls {
+                display: none;
+            }
+
+            .sheet {
+                box-shadow: none;
+                width: 100%;
+                padding: 10mm;
+                border-radius: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Controls -->
+    <div class="controls">
+        <h5>🖨️ Answer Sheet Generator</h5>
+        <div>
+            <label>Questions</label>
+            <input type="number" id="ctrl-q" value="40" min="5" max="100">
+        </div>
+        <div>
+            <label>Options</label>
+            <select id="ctrl-o">
+                <option value="4" selected>A B C D</option>
+                <option value="5">A B C D E</option>
+            </select>
+        </div>
+        <div>
+            <label>Exam Title</label>
+            <input type="text" id="ctrl-title" value="Biology Paper 1" style="width:140px;">
+        </div>
+        <div>
+            <label>Columns</label>
+            <select id="ctrl-col">
+                <option value="2" selected>2 columns</option>
+                <option value="3">3 columns</option>
+            </select>
+        </div>
+        <button onclick="buildSheet()">⟳ Generate</button>
+        <button class="btn-print" onclick="window.print()">🖨️ Print Sheet</button>
+    </div>
+
+    <!-- Answer Sheet -->
+    <div class="sheet" id="sheet">
+
+        <!-- Header -->
+        <div class="header">
+            <div class="header-top">
+                <div class="logo-box">MCQ</div>
+                <div class="header-title">
+                    <h2 id="sh-title">BIOLOGY PAPER 1</h2>
+                    <h3>MULTIPLE CHOICE ANSWER SHEET</h3>
+                </div>
+                <div class="barcode">
+                    <div class="barcode-lines" id="barcode-lines"></div>
+                    <small id="barcode-num">000000</small>
+                </div>
+            </div>
+            <div class="info-row">
+                <div class="info-field"><label>Student Name</label>
+                    <div class="line"></div>
+                </div>
+                <div class="info-field"><label>Index / Reg. Number</label>
+                    <div class="line"></div>
+                </div>
+                <div class="info-field"><label>Date</label>
+                    <div class="line"></div>
+                </div>
+                <div class="info-field"><label>Class / Grade</label>
+                    <div class="line"></div>
+                </div>
+                <div class="info-field"><label>Subject</label>
+                    <div class="line"></div>
+                </div>
+                <div class="info-field"><label>Examiner</label>
+                    <div class="line"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instructions -->
+        <div class="instructions">
+            <strong>INSTRUCTIONS TO CANDIDATES:</strong>
+            <p>
+                • Use a <strong>dark pen or pencil</strong> only. &nbsp;
+                • Fill the bubble <strong>completely</strong> for your chosen answer. &nbsp;
+                • If you change your answer, <strong>cross out</strong> the wrong bubble clearly and fill the correct
+                one. &nbsp;
+                • Do <strong>not</strong> make any stray marks on this sheet. &nbsp;
+                • Each question has <strong>ONE</strong> correct answer only.
+            </p>
+        </div>
+
+        <!-- Marking Example -->
+        <div class="example">
+            <strong>HOW TO MARK:</strong>
+            <span>Correct ➜</span>
+            <span class="bubble-ex filled">A</span>
+            &nbsp;&nbsp;
+            <span>Wrong (change) ➜</span>
+            <span class="bubble-ex cross"></span>
+            <span style="font-size:13px;margin-left:2px;">→</span>
+            <span class="bubble-ex filled" style="background:#1e1b4b;">B</span>
+            &nbsp;&nbsp;
+            <span style="color:red; font-weight:700;">Do NOT use tick marks ✓ or circles ○</span>
+        </div>
+
+        <!-- Answer Grid -->
+        <div class="section-title">ANSWER GRID</div>
+        <div class="grid-wrap" id="answer-grid"></div>
+
+        <!-- Score Section -->
+        <div class="score-section" style="margin-top:14px;">
+            <div class="score-box">
+                <label>Total Correct</label>
+                <div class="val"></div>
+            </div>
+            <div class="score-box">
+                <label>Total Wrong</label>
+                <div class="val"></div>
+            </div>
+            <div class="score-box">
+                <label>Not Answered</label>
+                <div class="val"></div>
+            </div>
+            <div class="score-box">
+                <label>Final Score</label>
+                <div class="val"></div>
+            </div>
+            <div class="score-box">
+                <label>Grade</label>
+                <div class="val"></div>
+            </div>
+            <div class="score-box">
+                <label>Checked By</label>
+                <div class="val"></div>
+            </div>
+        </div>
+
+        <div class="sheet-footer">
+            <span>MCQ Answer Checker System</span>
+            <span id="sh-footer-title">Biology Paper 1</span>
+            <span>Page 1 of 1</span>
+        </div>
+
+    </div>
+
+    <script>
+        const OPTS = ['A', 'B', 'C', 'D', 'E'];
+
+        function buildSheet() {
+            const n = Math.min(100, Math.max(5, parseInt(document.getElementById('ctrl-q').value) || 40));
+            const nOpt = parseInt(document.getElementById('ctrl-o').value);
+            const title = document.getElementById('ctrl-title').value || 'MCQ Exam';
+            const cols = parseInt(document.getElementById('ctrl-col').value);
+            const opts = OPTS.slice(0, nOpt);
+
+            document.getElementById('sh-title').textContent = title.toUpperCase();
+            document.getElementById('sh-footer-title').textContent = title;
+
+            // Barcode decoration
+            const bcLines = document.getElementById('barcode-lines');
+            bcLines.innerHTML = Array.from({ length: 38 }, () => `<span></span>`).join('');
+            document.getElementById('barcode-num').textContent = String(Math.floor(Math.random() * 900000 + 100000));
+
+            // Grid
+            const g = document.getElementById('answer-grid');
+            g.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+            g.innerHTML = Array.from({ length: n }, (_, i) => `
+    <div class="q-row">
+      <span class="q-num">${i + 1}.</span>
+      ${opts.map(o => `
+        <div class="bubble">${o}</div>
+      `).join('')}
+    </div>
+  `).join('');
+        }
+
+        buildSheet();
+    </script>
+</body>
+
+</html>

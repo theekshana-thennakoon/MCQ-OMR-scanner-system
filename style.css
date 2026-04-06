@@ -1,0 +1,22 @@
+body {
+    background: linear-gradient(135deg, #141e30, #243b55);
+    color: white;
+    font-family: 'Poppins', sans-serif;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.btn-main {
+    background: linear-gradient(45deg, #00c6ff, #0072ff);
+    border: none;
+    color: white;
+}
+
+video {
+    border-radius: 15px;
+    border: 3px solid #00c6ff;
+}
