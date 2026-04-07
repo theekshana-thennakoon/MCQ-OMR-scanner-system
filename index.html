@@ -24,7 +24,7 @@
         }
 
         .sidebar .logo {
-            padding: 22px 18px;
+            padding: 18px 16px;
             border-bottom: 1px solid rgba(255, 255, 255, .1);
         }
 
@@ -32,21 +32,33 @@
             color: #fff;
             margin: 0;
             font-weight: 700;
+            font-size: 15px;
         }
 
         .sidebar .logo small {
             color: #a5b4fc;
+            font-size: 11px;
+        }
+
+        .nav-sec {
+            padding: 8px 14px 3px;
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #6366f1;
+            font-weight: 700;
         }
 
         .nav-item-side {
             color: rgba(255, 255, 255, .7);
-            padding: 12px 18px;
+            padding: 10px 16px;
             display: flex;
             align-items: center;
             gap: 10px;
             cursor: pointer;
             border-left: 3px solid transparent;
             transition: .2s;
+            font-size: 13.5px;
         }
 
         .nav-item-side:hover {
@@ -62,7 +74,7 @@
 
         .main {
             margin-left: 230px;
-            padding: 28px;
+            padding: 26px;
         }
 
         .page {
@@ -77,13 +89,31 @@
             background: #fff;
             border-radius: 14px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, .07);
-            padding: 22px;
+            padding: 20px;
         }
 
-        /* Admin answer options */
+        .paper-card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .07);
+            padding: 16px 18px;
+            border-left: 5px solid #4f46e5;
+            transition: .2s;
+        }
+
+        .paper-card:hover {
+            box-shadow: 0 4px 16px rgba(79, 70, 229, .15);
+            transform: translateY(-1px);
+        }
+
+        .paper-card.ready {
+            border-left-color: #10b981;
+            background: #f0fdf4;
+        }
+
         .opt-pill {
             cursor: pointer;
-            padding: 5px 14px;
+            padding: 4px 13px;
             border-radius: 20px;
             border: 2px solid #e2e8f0;
             font-weight: 700;
@@ -103,15 +133,15 @@
             color: #fff;
         }
 
-        /* Checker answer buttons */
+        /* Checker grid (status panel) */
         .ans-btn {
-            width: 42px;
-            height: 42px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             border: 2px solid #cbd5e1;
             background: #fff;
             font-weight: 700;
-            font-size: 14px;
+            font-size: 12px;
             cursor: pointer;
             transition: .15s;
             flex-shrink: 0;
@@ -149,11 +179,11 @@
         .q-row {
             background: #f8fafc;
             border-radius: 10px;
-            padding: 9px 12px;
-            margin-bottom: 6px;
+            padding: 7px 10px;
+            margin-bottom: 5px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 7px;
             flex-wrap: wrap;
             border: 2px solid transparent;
         }
@@ -168,26 +198,34 @@
             background: #fef2f2;
         }
 
-        /* Camera */
+        /* Camera container */
+        .cam-wrap {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #000;
+            min-height: 180px;
+        }
+
         #videoEl {
             width: 100%;
-            border-radius: 12px;
-            background: #000;
             display: none;
             max-height: 360px;
             object-fit: cover;
+            border-radius: 12px;
         }
 
         #canvasEl {
             width: 100%;
-            border-radius: 12px;
             display: none;
+            border-radius: 12px;
+            touch-action: none;
         }
 
-        .cam-placeholder {
+        .cam-ph {
             background: #1e1b4b;
             border-radius: 12px;
-            height: 220px;
+            height: 200px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -196,10 +234,46 @@
             gap: 8px;
         }
 
-        /* Score ring */
+        .cam-hint {
+            position: absolute;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, .6);
+            color: #fff;
+            font-size: 11px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            white-space: nowrap;
+            pointer-events: none;
+            display: none;
+        }
+
+        /* Detection panel */
+        #detect-panel {
+            background: #f0fdf4;
+            border: 1.5px solid #10b981;
+            border-radius: 10px;
+            padding: 10px 14px;
+            display: none;
+        }
+
+        #detect-panel .stat-box {
+            background: #fff;
+            border-radius: 8px;
+            padding: 8px 12px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+
+        #detect-panel .stat-box .num {
+            font-size: 1.4rem;
+            font-weight: 800;
+        }
+
         .score-ring {
-            width: 120px;
-            height: 120px;
+            width: 110px;
+            height: 110px;
             border-radius: 50%;
             border: 8px solid;
             display: flex;
@@ -211,22 +285,22 @@
 
         .toast-wrap {
             position: fixed;
-            top: 18px;
-            right: 18px;
+            top: 16px;
+            right: 16px;
             z-index: 9999;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 7px;
         }
 
         .toast-item {
-            padding: 11px 18px;
+            padding: 10px 16px;
             border-radius: 10px;
             color: #fff;
             font-weight: 500;
-            font-size: 14px;
-            max-width: 320px;
-            box-shadow: 0 4px 14px rgba(0, 0, 0, .18);
+            font-size: 13px;
+            max-width: 300px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, .18);
             animation: tIn .25s;
         }
 
@@ -244,86 +318,179 @@
 
         @media(max-width:768px) {
             .sidebar {
-                width: 58px;
+                width: 56px;
             }
 
             .sidebar .logo h5,
             .sidebar .logo small,
-            .nav-item-side span {
+            .nav-item-side span,
+            .nav-sec {
                 display: none;
             }
 
             .main {
-                margin-left: 58px;
-                padding: 14px;
+                margin-left: 56px;
+                padding: 12px;
             }
         }
     </style>
 </head>
 
 <body>
-
     <div class="toast-wrap" id="toastWrap"></div>
 
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="logo">
             <h5><i class="bi bi-check2-circle me-2"></i>MCQ Checker</h5>
-            <small>Answer Sheet Scanner</small>
+            <small>Multi-Paper System</small>
         </div>
-        <div class="mt-2">
-            <div class="nav-item-side active" id="nav-admin" onclick="showPage('admin')">
-                <i class="bi bi-gear-fill"></i><span>Admin Setup</span>
-            </div>
-            <div class="nav-item-side" id="nav-checker" onclick="showPage('checker')">
-                <i class="bi bi-camera-fill"></i><span>Check Answers</span>
-            </div>
-            <div class="nav-item-side" id="nav-results" onclick="showPage('results')">
-                <i class="bi bi-bar-chart-fill"></i><span>Results</span>
-            </div>
+        <div class="mt-1">
+            <div class="nav-sec">Admin</div>
+            <div class="nav-item-side active" id="nav-papers" onclick="showPage('papers')"><i
+                    class="bi bi-folder-fill"></i><span>My Papers</span></div>
+            <div class="nav-item-side" id="nav-editor" onclick="showPage('editor')"><i
+                    class="bi bi-pencil-square"></i><span>Edit Paper</span></div>
+            <div class="nav-sec">Sheet</div>
+            <div class="nav-item-side" id="nav-sheet" onclick="showPage('sheet')"><i
+                    class="bi bi-file-earmark-ruled-fill"></i><span>Generate Sheet</span></div>
+            <div class="nav-sec">Exam</div>
+            <div class="nav-item-side" id="nav-checker" onclick="showPage('checker')"><i
+                    class="bi bi-camera-fill"></i><span>Check Answers</span></div>
+            <div class="nav-item-side" id="nav-results" onclick="showPage('results')"><i
+                    class="bi bi-bar-chart-fill"></i><span>Results</span></div>
         </div>
     </div>
 
-    <!-- Content -->
     <div class="main">
 
-        <!-- ADMIN -->
-        <div class="page active" id="page-admin">
-            <h4 class="fw-bold mb-1">Admin Setup</h4>
-            <p class="text-muted mb-4">Set the correct answers for your exam paper</p>
+        <!-- PAPERS -->
+        <div class="page active" id="page-papers">
+            <div class="d-flex align-items-center justify-content-between mb-4 flex-wrap gap-2">
+                <div>
+                    <h4 class="fw-bold mb-1">My Papers</h4>
+                    <p class="text-muted mb-0">Manage all exam papers</p>
+                </div>
+                <button class="btn btn-primary" onclick="openNewPaper()"><i class="bi bi-plus-lg me-2"></i>New
+                    Paper</button>
+            </div>
+            <div id="papers-list" class="row g-3"></div>
+        </div>
+
+        <!-- EDITOR -->
+        <div class="page" id="page-editor">
+            <div class="d-flex align-items-center gap-3 mb-4 flex-wrap">
+                <button class="btn btn-outline-secondary btn-sm" onclick="showPage('papers')"><i
+                        class="bi bi-arrow-left"></i></button>
+                <div>
+                    <h4 class="fw-bold mb-0" id="editor-heading">Edit Paper</h4><small class="text-muted"
+                        id="editor-sub"></small>
+                </div>
+                <div class="ms-auto"><button class="btn btn-success" onclick="savePaper()"><i
+                            class="bi bi-floppy-fill me-1"></i>Save Paper</button></div>
+            </div>
             <div class="row g-4">
                 <div class="col-md-4">
                     <div class="card-box">
-                        <h6 class="fw-bold mb-3"><i class="bi bi-sliders me-2 text-primary"></i>Paper Settings</h6>
-                        <label class="form-label fw-semibold small">Paper Title</label>
-                        <input id="inp-title" class="form-control mb-3" value="MCQ Exam" placeholder="Paper title">
-                        <label class="form-label fw-semibold small">Number of Questions</label>
+                        <h6 class="fw-bold mb-3"><i class="bi bi-sliders me-2 text-primary"></i>Settings</h6>
+                        <label class="form-label small fw-semibold">Paper Title</label>
+                        <input id="e-title" class="form-control mb-3" placeholder="e.g. Biology Paper 1">
+                        <label class="form-label small fw-semibold">Subject</label>
+                        <input id="e-subject" class="form-control mb-3" placeholder="e.g. Science">
+                        <label class="form-label small fw-semibold">Number of Questions</label>
                         <div class="input-group mb-3">
-                            <input id="inp-count" type="number" class="form-control" value="10" min="1" max="100">
-                            <button class="btn btn-primary" onclick="generateAdminGrid()">
-                                <i class="bi bi-arrow-clockwise"></i> Generate
-                            </button>
+                            <input id="e-count" type="number" class="form-control" value="10" min="1" max="100">
+                            <button class="btn btn-primary" onclick="generateEditorGrid()"><i
+                                    class="bi bi-arrow-clockwise"></i></button>
                         </div>
-                        <label class="form-label fw-semibold small">Options per Question</label>
-                        <select id="inp-opts" class="form-select mb-3">
+                        <label class="form-label small fw-semibold">Options per Question</label>
+                        <select id="e-opts" class="form-select mb-3">
                             <option value="4" selected>4 options (A B C D)</option>
                             <option value="5">5 options (A B C D E)</option>
                         </select>
-                        <button class="btn btn-success w-100 mb-2" onclick="saveKey()">
-                            <i class="bi bi-floppy-fill me-2"></i>Save Answer Key
-                        </button>
-                        <button class="btn btn-outline-secondary w-100 mb-2" onclick="bulkSelect()">
-                            <i class="bi bi-check-all me-2"></i>Set All to A
-                        </button>
-                        <button class="btn btn-outline-danger w-100" onclick="clearKey()">
-                            <i class="bi bi-trash me-2"></i>Clear All
-                        </button>
+                        <label class="form-label small fw-semibold">Sheet Layout Columns</label>
+                        <select id="e-cols" class="form-select mb-3">
+                            <option value="2" selected>2 Columns</option>
+                            <option value="3">3 Columns</option>
+                        </select>
+                        <hr>
+                        <button class="btn btn-outline-secondary w-100 mb-2" onclick="bulkSetAll('A')">Set All →
+                            A</button>
+                        <button class="btn btn-outline-secondary w-100 mb-2" onclick="bulkClear()">Clear All</button>
+                        <button class="btn btn-outline-danger w-100" onclick="deletePaper()"><i
+                                class="bi bi-trash me-1"></i>Delete</button>
                     </div>
                 </div>
                 <div class="col-md-8">
                     <div class="card-box">
-                        <h6 class="fw-bold mb-3"><i class="bi bi-list-ol me-2 text-primary"></i>Answer Key</h6>
-                        <div id="admin-grid" style="max-height:520px;overflow-y:auto;"></div>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h6 class="fw-bold mb-0"><i class="bi bi-list-ol me-2 text-primary"></i>Answer Key</h6>
+                            <span class="badge bg-secondary" id="e-progress">0 / 0</span>
+                        </div>
+                        <div id="editor-grid" style="max-height:500px;overflow-y:auto;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- GENERATE SHEET -->
+        <div class="page" id="page-sheet">
+            <div class="d-flex align-items-center justify-content-between mb-4 flex-wrap gap-2">
+                <div>
+                    <h4 class="fw-bold mb-1">Generate Answer Sheet</h4>
+                    <p class="text-muted mb-0">Printable MCQ answer sheets</p>
+                </div>
+                <div class="d-flex gap-2">
+                    <button class="btn btn-outline-primary" onclick="buildSheet()"><i
+                            class="bi bi-arrow-clockwise me-1"></i>Refresh</button>
+                    <button class="btn btn-success" onclick="printSheet()"><i
+                            class="bi bi-printer-fill me-1"></i>Print</button>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-3">
+                    <div class="card-box">
+                        <h6 class="fw-bold mb-3"><i class="bi bi-sliders me-2 text-primary"></i>Options</h6>
+                        <label class="form-label small fw-semibold">Load from Paper</label>
+                        <select id="sh-paper-sel" class="form-select mb-3" onchange="loadSheetFromPaper()">
+                            <option value="">— Custom —</option>
+                        </select>
+                        <label class="form-label small fw-semibold">Title</label>
+                        <input id="sh-title" class="form-control mb-3" value="MCQ Examination">
+                        <label class="form-label small fw-semibold">Subject</label>
+                        <input id="sh-subject" class="form-control mb-3" placeholder="Subject">
+                        <label class="form-label small fw-semibold">Questions</label>
+                        <input id="sh-count" type="number" class="form-control mb-3" value="40" min="5" max="100">
+                        <label class="form-label small fw-semibold">Options</label>
+                        <select id="sh-opts" class="form-select mb-3">
+                            <option value="4" selected>A B C D</option>
+                            <option value="5">A B C D E</option>
+                        </select>
+                        <label class="form-label small fw-semibold">Columns</label>
+                        <select id="sh-cols" class="form-select mb-3">
+                            <option value="2" selected>2 Columns</option>
+                            <option value="3">3 Columns</option>
+                        </select>
+                        <label class="form-label small fw-semibold">School</label>
+                        <input id="sh-school" class="form-control mb-3" placeholder="Optional">
+                        <label class="form-label small fw-semibold">Duration</label>
+                        <input id="sh-duration" class="form-control mb-3" placeholder="e.g. 1 Hour">
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="sh-show-key" onchange="buildSheet()">
+                            <label class="form-check-label small" for="sh-show-key">Teacher copy (show key)</label>
+                        </div>
+                        <button class="btn btn-primary w-100" onclick="buildSheet()"><i
+                                class="bi bi-eye me-1"></i>Preview</button>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="card-box p-3">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <h6 class="fw-bold mb-0"><i class="bi bi-eye me-2 text-primary"></i>Preview</h6>
+                            <span class="badge bg-info text-dark">Print size may vary by browser</span>
+                        </div>
+                        <div id="sheet-preview-wrap"
+                            style="max-height:680px;overflow-y:auto;border-radius:10px;border:1px solid #e2e8f0;"></div>
                     </div>
                 </div>
             </div>
@@ -332,27 +499,96 @@
         <!-- CHECKER -->
         <div class="page" id="page-checker">
             <h4 class="fw-bold mb-1">Check Answer Sheet</h4>
-            <p class="text-muted mb-4">Use camera to view the sheet, then click the bubbles you see marked</p>
-            <div class="row g-4">
-                <div class="col-lg-5">
+            <p class="text-muted mb-3">Snap the answer sheet → draw around the grid → auto-detect answers</p>
+
+            <!-- Paper selector -->
+            <div class="card-box mb-3">
+                <div class="d-flex align-items-center gap-3 flex-wrap">
+                    <label class="fw-semibold small mb-0">Paper:</label>
+                    <select id="chk-paper-sel" class="form-select" style="max-width:260px;"
+                        onchange="loadCheckerPaper()">
+                        <option value="">-- Choose a paper --</option>
+                    </select>
+                    <span class="badge bg-primary d-none" id="chk-paper-info"></span>
+                    <div class="ms-auto d-flex gap-2 align-items-center">
+                        <label class="small mb-0">Sheet cols:</label>
+                        <select id="chk-cols" class="form-select form-select-sm" style="width:110px;">
+                            <option value="2" selected>2 cols</option>
+                            <option value="3">3 cols</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-3">
+                <!-- Camera column -->
+                <div class="col-lg-6">
                     <div class="card-box">
-                        <h6 class="fw-bold mb-3"><i class="bi bi-camera me-2 text-primary"></i>Camera</h6>
-                        <div id="cam-placeholder" class="cam-placeholder">
-                            <i class="bi bi-camera-video-off" style="font-size:2.2rem;"></i>
-                            <span>Camera not started</span>
-                            <small>Click Start Camera below</small>
+                        <!-- Step indicator -->
+                        <div class="d-flex gap-2 mb-3 flex-wrap" id="step-indicator">
+                            <span class="badge bg-primary" id="step1-badge">1. Snap</span>
+                            <span class="text-muted">→</span>
+                            <span class="badge bg-secondary" id="step2-badge">2. Draw Grid</span>
+                            <span class="text-muted">→</span>
+                            <span class="badge bg-secondary" id="step3-badge">3. Auto Detect</span>
+                            <span class="text-muted">→</span>
+                            <span class="badge bg-secondary" id="step4-badge">4. Check & Save</span>
                         </div>
-                        <video id="videoEl" autoplay playsinline muted></video>
-                        <canvas id="canvasEl"></canvas>
-                        <div class="d-flex gap-2 mt-3">
-                            <button id="btn-cam" class="btn btn-primary flex-grow-1" onclick="toggleCamera()">
+
+                        <!-- Camera/snapshot area -->
+                        <div class="cam-wrap" id="cam-wrap">
+                            <div id="cam-ph" class="cam-ph">
+                                <i class="bi bi-camera-video-off" style="font-size:2rem;"></i>
+                                <span>Camera not started</span>
+                                <small>Click "Start Camera" below</small>
+                            </div>
+                            <video id="videoEl" autoplay playsinline muted></video>
+                            <canvas id="canvasEl"></canvas>
+                            <div class="cam-hint" id="cam-hint"></div>
+                        </div>
+
+                        <!-- Camera controls -->
+                        <div class="d-flex gap-2 mt-2 flex-wrap">
+                            <button id="btn-cam" class="btn btn-primary" onclick="toggleCamera()">
                                 <i class="bi bi-camera-video me-1"></i>Start Camera
                             </button>
-                            <button class="btn btn-outline-secondary" onclick="takeSnapshot()">
-                                <i class="bi bi-camera"></i> Snap
+                            <button id="btn-snap" class="btn btn-outline-secondary d-none" onclick="takeSnapshot()">
+                                <i class="bi bi-camera-fill me-1"></i>Snapshot
+                            </button>
+                            <button id="btn-draw" class="btn btn-outline-info d-none" onclick="toggleDrawMode()">
+                                <i class="bi bi-bounding-box me-1"></i>Select Grid
+                            </button>
+                            <button id="btn-retake" class="btn btn-outline-warning d-none" onclick="retakeSnapshot()">
+                                <i class="bi bi-arrow-counterclockwise me-1"></i>Retake
                             </button>
                         </div>
-                        <div class="mt-3 d-flex gap-3 small">
+
+                        <!-- Detection result panel -->
+                        <div id="detect-panel" class="mt-3">
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <strong class="small"><i class="bi bi-cpu me-1"></i>Auto-Detection Result</strong>
+                                <div class="d-flex align-items-center gap-2">
+                                    <label class="small mb-0">Sensitivity</label>
+                                    <input type="range" id="det-thresh" min="50" max="220" value="128"
+                                        style="width:80px;"
+                                        oninput="document.getElementById('thresh-val').textContent=this.value">
+                                    <span id="thresh-val" class="badge bg-secondary">128</span>
+                                    <button class="btn btn-sm btn-outline-primary"
+                                        onclick="runAutoDetect()">Re-detect</button>
+                                </div>
+                            </div>
+                            <div class="row g-2 text-center" id="detect-stats"></div>
+                            <small class="text-muted d-block mt-2">
+                                <i class="bi bi-info-circle me-1"></i>Click any bubble on the image above to manually
+                                fix it. Grid below also works.
+                            </small>
+                        </div>
+
+                        <!-- Legend -->
+                        <div class="mt-3 d-flex gap-3 flex-wrap small border-top pt-2">
+                            <span><span
+                                    style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#4f46e5;"></span>
+                                Selected</span>
                             <span><span
                                     style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#10b981;"></span>
                                 Correct</span>
@@ -362,27 +598,27 @@
                             <span><span
                                     style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#f59e0b;"></span>
                                 Missed</span>
-                            <span><span
-                                    style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#4f46e5;"></span>
-                                Selected</span>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-7">
-                    <div class="card-box">
+
+                <!-- Answer grid column -->
+                <div class="col-lg-6">
+                    <div class="card-box d-flex flex-column" style="height:100%;">
                         <div class="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-2">
-                            <h6 class="fw-bold mb-0"><i class="bi bi-pencil-square me-2 text-primary"></i>Student
-                                Answers</h6>
+                            <h6 class="fw-bold mb-0"><i class="bi bi-list-check me-2 text-primary"></i>Answers
+                                <span class="badge bg-secondary ms-1" id="ans-count">0/0</span>
+                            </h6>
                             <div class="d-flex gap-2">
                                 <input id="inp-student" class="form-control form-control-sm" placeholder="Student name"
-                                    style="width:150px;">
+                                    style="width:140px;">
                                 <button class="btn btn-sm btn-outline-secondary" onclick="resetChecker()">Reset</button>
                             </div>
                         </div>
-                        <div id="checker-grid" style="max-height:420px;overflow-y:auto;"></div>
+                        <div id="checker-grid" style="flex:1;overflow-y:auto;max-height:360px;"></div>
                         <div class="d-flex gap-2 mt-3">
                             <button class="btn btn-primary flex-grow-1" onclick="checkAnswers()">
-                                <i class="bi bi-check2-all me-2"></i>Check All Answers
+                                <i class="bi bi-check2-all me-2"></i>Check All
                             </button>
                             <button class="btn btn-success" onclick="saveResult()">
                                 <i class="bi bi-save me-2"></i>Save
@@ -395,345 +631,781 @@
 
         <!-- RESULTS -->
         <div class="page" id="page-results">
-            <div class="d-flex align-items-center justify-content-between mb-4">
+            <div class="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-2">
                 <div>
                     <h4 class="fw-bold mb-1">Results History</h4>
-                    <p class="text-muted mb-0">All saved exam results</p>
+                    <p class="text-muted mb-0">All saved results</p>
                 </div>
-                <button class="btn btn-outline-danger btn-sm" onclick="clearResults()">
-                    <i class="bi bi-trash me-1"></i>Clear All
-                </button>
+                <div class="d-flex gap-2">
+                    <select id="res-filter" class="form-select form-select-sm" style="width:200px;"
+                        onchange="buildResults()">
+                        <option value="">All Papers</option>
+                    </select>
+                    <button class="btn btn-outline-danger btn-sm" onclick="clearResults()"><i
+                            class="bi bi-trash me-1"></i>Clear</button>
+                </div>
             </div>
             <div id="results-list"></div>
         </div>
-
-    </div><!-- /main -->
+    </div>
 
     <script>
-        // ── State ──────────────────────────────────────────────────────────────
+        // ── Constants & State ──────────────────────────────────────────────────
         const OPTS = ['A', 'B', 'C', 'D', 'E'];
-        let answerKey = JSON.parse(localStorage.getItem('mcq_key') || '[]');
-        let savedResults = JSON.parse(localStorage.getItem('mcq_results') || '[]');
-        let studentAnswers = [];
-        let stream = null;
-        let camOn = false;
+        let papers = JSON.parse(localStorage.getItem('mcq_papers') || '[]');
+        let results = JSON.parse(localStorage.getItem('mcq_results2') || '[]');
+        let activePaperId = null, editorKey = [], checkerKey = [], studentAns = [];
+        let stream = null, camOn = false;
+        // Canvas detection state
+        let origImgData = null;   // stored ImageData of snapshot
+        let hitAreas = [];     // {qi, opt, cx, cy, r}
+        let drawMode = false;
+        let isDrawing = false;
+        let selStart = null, selEnd = null;
+        let lastSelArea = null;   // {x,y,w,h} of last drawn selection
 
         // ── Navigation ─────────────────────────────────────────────────────────
         function showPage(name) {
-            ['admin', 'checker', 'results'].forEach(p => {
+            ['papers', 'editor', 'sheet', 'checker', 'results'].forEach(p => {
                 document.getElementById('page-' + p).classList.toggle('active', p === name);
                 document.getElementById('nav-' + p).classList.toggle('active', p === name);
             });
-            if (name === 'checker') buildCheckerGrid();
+            if (name === 'papers') buildPapersList();
+            if (name === 'sheet') initSheetPage();
+            if (name === 'checker') initCheckerPage();
             if (name === 'results') buildResults();
         }
 
-        // ── Admin ──────────────────────────────────────────────────────────────
-        function generateAdminGrid() {
-            const n = Math.min(100, Math.max(1, parseInt(document.getElementById('inp-count').value) || 10));
-            const nOpt = parseInt(document.getElementById('inp-opts').value);
-            // keep existing answers when regenerating
-            const old = answerKey.slice();
-            answerKey = Array.from({ length: n }, (_, i) => ({
-                q: i + 1,
-                ans: old[i]?.ans || null
-            }));
-            renderAdminGrid(nOpt);
-        }
-
-        function renderAdminGrid(nOpt) {
-            nOpt = nOpt || parseInt(document.getElementById('inp-opts').value) || 4;
-            const opts = OPTS.slice(0, nOpt);
-            const g = document.getElementById('admin-grid');
-            g.innerHTML = answerKey.map((q, i) => `
-    <div style="background:#f8fafc;border-radius:10px;padding:9px 12px;margin-bottom:6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-      <span class="fw-bold text-muted" style="min-width:32px;font-size:14px;">Q${q.q}</span>
-      ${opts.map(o => `
-        <span class="opt-pill ${q.ans === o ? 'active' : ''}"
-              id="ap-${i}-${o}"
-              onclick="setKey(${i},'${o}')">${o}</span>
-      `).join('')}
-      <span class="ms-auto badge ${q.ans ? 'bg-success' : 'bg-secondary'}" id="abadge-${i}">
-        ${q.ans || '—'}
-      </span>
-    </div>`).join('');
-        }
-
-        function setKey(qi, opt) {
-            answerKey[qi].ans = answerKey[qi].ans === opt ? null : opt; // toggle
-            const nOpt = parseInt(document.getElementById('inp-opts').value) || 4;
-            OPTS.slice(0, nOpt).forEach(o => {
-                const el = document.getElementById(`ap-${qi}-${o}`);
-                if (el) el.className = 'opt-pill' + (answerKey[qi].ans === o ? ' active' : '');
-            });
-            const badge = document.getElementById(`abadge-${qi}`);
-            if (badge) {
-                badge.textContent = answerKey[qi].ans || '—';
-                badge.className = 'ms-auto badge ' + (answerKey[qi].ans ? 'bg-success' : 'bg-secondary');
-            }
-        }
-
-        function saveKey() {
-            if (!answerKey.length) { toast('Generate questions first!', 'warn'); return; }
-            const missing = answerKey.filter(q => !q.ans).length;
-            if (missing) toast(`${missing} question(s) still have no answer`, 'warn');
-            const title = document.getElementById('inp-title').value || 'MCQ Exam';
-            localStorage.setItem('mcq_key', JSON.stringify(answerKey));
-            localStorage.setItem('mcq_title', title);
-            toast('Answer key saved ✓', 'ok');
-        }
-
-        function bulkSelect() {
-            answerKey.forEach((_, i) => { answerKey[i].ans = 'A'; });
-            renderAdminGrid();
-        }
-
-        function clearKey() {
-            if (!confirm('Clear all questions?')) return;
-            answerKey = [];
-            localStorage.removeItem('mcq_key');
-            document.getElementById('admin-grid').innerHTML = '';
-            toast('Cleared', 'info');
-        }
-
-        // ── Checker ────────────────────────────────────────────────────────────
-        function buildCheckerGrid() {
-            answerKey = JSON.parse(localStorage.getItem('mcq_key') || '[]');
-            studentAnswers = Array(answerKey.length).fill(null);
-            const g = document.getElementById('checker-grid');
-            if (!answerKey.length) {
-                g.innerHTML = `<div class="text-center text-muted py-5">
-      <i class="bi bi-exclamation-circle fs-2"></i>
-      <p class="mt-2">No answer key found. Set it up in Admin Setup.</p></div>`;
+        // ── Papers ─────────────────────────────────────────────────────────────
+        function buildPapersList() {
+            const c = document.getElementById('papers-list');
+            if (!papers.length) {
+                c.innerHTML = `<div class="col-12"><div class="card-box text-center text-muted py-5">
+      <i class="bi bi-folder2-open" style="font-size:3rem;"></i>
+      <p class="mt-3 mb-2">No papers yet.</p>
+      <button class="btn btn-primary btn-sm" onclick="openNewPaper()"><i class="bi bi-plus-lg me-1"></i>Create First Paper</button>
+    </div></div>`;
                 return;
             }
-            g.innerHTML = answerKey.map((q, i) => `
+            c.innerHTML = papers.map(p => {
+                const ans = p.key.filter(q => q.ans).length;
+                const pct = p.key.length ? Math.round(ans / p.key.length * 100) : 0;
+                const ready = ans === p.key.length && p.key.length > 0;
+                const rCount = results.filter(r => r.paperId === p.id).length;
+                return `<div class="col-md-6 col-lg-4"><div class="paper-card ${ready ? 'ready' : ''}">
+      <div class="d-flex justify-content-between align-items-start mb-2">
+        <div><h6 class="fw-bold mb-0">${p.title}</h6><small class="text-muted">${p.subject || 'No subject'}</small></div>
+        <span class="badge ${ready ? 'bg-success' : 'bg-warning text-dark'}">${ready ? '✓ Ready' : 'Incomplete'}</span>
+      </div>
+      <div class="d-flex gap-2 mb-2 flex-wrap">
+        <span class="badge bg-primary">${p.key.length} Qs</span>
+        <span class="badge bg-info text-dark">${p.nOpt} Options</span>
+        <span class="badge bg-secondary">${p.sheetCols || 2} Cols</span>
+        <span class="badge bg-dark">${rCount} Results</span>
+      </div>
+      <div class="progress mb-2" style="height:5px;"><div class="progress-bar bg-${ready ? 'success' : 'warning'}" style="width:${pct}%;"></div></div>
+      <small class="text-muted d-block mb-3">${ans}/${p.key.length} answers &bull; ${new Date(p.created).toLocaleDateString()}</small>
+      <div class="d-flex gap-1">
+        <button class="btn btn-sm btn-primary flex-grow-1" onclick="openEditPaper('${p.id}')"><i class="bi bi-pencil me-1"></i>Edit</button>
+        <button class="btn btn-sm btn-outline-info" onclick="openSheetFor('${p.id}')"><i class="bi bi-file-earmark-ruled me-1"></i>Sheet</button>
+        <button class="btn btn-sm btn-outline-success" onclick="openCheckerFor('${p.id}')"><i class="bi bi-camera me-1"></i>Check</button>
+        <button class="btn btn-sm btn-outline-danger" onclick="deletePaperById('${p.id}')"><i class="bi bi-trash"></i></button>
+      </div>
+    </div></div>`;
+            }).join('');
+        }
+
+        // ── Editor ─────────────────────────────────────────────────────────────
+        function openNewPaper() {
+            activePaperId = 'new-' + Date.now(); editorKey = [];
+            ['e-title', 'e-subject'].forEach(id => document.getElementById(id).value = '');
+            document.getElementById('e-count').value = 10;
+            document.getElementById('e-opts').value = 4;
+            document.getElementById('e-cols').value = 2;
+            document.getElementById('editor-heading').textContent = 'New Paper';
+            document.getElementById('editor-sub').textContent = 'Set up your exam paper';
+            document.getElementById('editor-grid').innerHTML = '';
+            updateEditorProgress(); showPage('editor');
+        }
+        function openEditPaper(id) {
+            const p = papers.find(x => x.id === id); if (!p) return;
+            activePaperId = id; editorKey = JSON.parse(JSON.stringify(p.key));
+            document.getElementById('e-title').value = p.title;
+            document.getElementById('e-subject').value = p.subject || '';
+            document.getElementById('e-count').value = p.key.length;
+            document.getElementById('e-opts').value = p.nOpt;
+            document.getElementById('e-cols').value = p.sheetCols || 2;
+            document.getElementById('editor-heading').textContent = 'Edit: ' + p.title;
+            document.getElementById('editor-sub').textContent = p.key.length + ' questions';
+            renderEditorGrid(p.nOpt); showPage('editor');
+        }
+        function generateEditorGrid() {
+            const n = Math.min(100, Math.max(1, parseInt(document.getElementById('e-count').value) || 10));
+            const nOpt = parseInt(document.getElementById('e-opts').value);
+            const old = editorKey.slice();
+            editorKey = Array.from({ length: n }, (_, i) => ({ q: i + 1, ans: old[i]?.ans || null }));
+            renderEditorGrid(nOpt);
+        }
+        function renderEditorGrid(nOpt) {
+            nOpt = nOpt || parseInt(document.getElementById('e-opts').value) || 4;
+            document.getElementById('editor-grid').innerHTML = editorKey.map((q, i) => `
+    <div style="background:#f8fafc;border-radius:9px;padding:8px 12px;margin-bottom:6px;display:flex;align-items:center;gap:7px;flex-wrap:wrap;">
+      <span class="fw-bold text-muted" style="min-width:30px;font-size:13px;">Q${q.q}</span>
+      ${OPTS.slice(0, nOpt).map(o => `<span class="opt-pill ${q.ans === o ? 'active' : ''}" id="ap-${i}-${o}" onclick="setKey(${i},'${o}')">${o}</span>`).join('')}
+      <span class="ms-auto badge ${q.ans ? 'bg-success' : 'bg-secondary'}" id="abadge-${i}">${q.ans || '—'}</span>
+    </div>`).join('');
+            updateEditorProgress();
+        }
+        function setKey(qi, opt) {
+            editorKey[qi].ans = editorKey[qi].ans === opt ? null : opt;
+            const nOpt = parseInt(document.getElementById('e-opts').value);
+            OPTS.slice(0, nOpt).forEach(o => {
+                const el = document.getElementById(`ap-${qi}-${o}`);
+                if (el) el.className = 'opt-pill' + (editorKey[qi].ans === o ? ' active' : '');
+            });
+            const b = document.getElementById(`abadge-${qi}`);
+            if (b) { b.textContent = editorKey[qi].ans || '—'; b.className = `ms-auto badge ${editorKey[qi].ans ? 'bg-success' : 'bg-secondary'}`; }
+            updateEditorProgress();
+        }
+        function updateEditorProgress() {
+            const ans = editorKey.filter(q => q.ans).length;
+            document.getElementById('e-progress').textContent = `${ans} / ${editorKey.length}`;
+        }
+        function savePaper() {
+            const title = document.getElementById('e-title').value.trim();
+            if (!title) { toast('Enter a paper title', 'warn'); return; }
+            if (!editorKey.length) { toast('Generate questions first!', 'warn'); return; }
+            const missing = editorKey.filter(q => !q.ans).length;
+            if (missing) toast(`${missing} question(s) have no answer`, 'warn');
+            const nOpt = parseInt(document.getElementById('e-opts').value);
+            const sheetCols = parseInt(document.getElementById('e-cols').value);
+            const idx = papers.findIndex(p => p.id === activePaperId);
+            const paper = {
+                id: activePaperId, title, subject: document.getElementById('e-subject').value.trim(),
+                nOpt, sheetCols, key: JSON.parse(JSON.stringify(editorKey)),
+                created: idx >= 0 ? papers[idx].created : Date.now(), updated: Date.now()
+            };
+            if (idx >= 0) papers[idx] = paper; else papers.push(paper);
+            localStorage.setItem('mcq_papers', JSON.stringify(papers));
+            toast(`"${title}" saved!`, 'ok'); showPage('papers');
+        }
+        function deletePaper() { if (!activePaperId || !confirm('Delete?')) return; deletePaperById(activePaperId); showPage('papers'); }
+        function deletePaperById(id) {
+            if (!confirm('Delete this paper and results?')) return;
+            papers = papers.filter(p => p.id !== id);
+            results = results.filter(r => r.paperId !== id);
+            localStorage.setItem('mcq_papers', JSON.stringify(papers));
+            localStorage.setItem('mcq_results2', JSON.stringify(results));
+            buildPapersList(); toast('Deleted', 'info');
+        }
+        function bulkSetAll(opt) { editorKey.forEach((_, i) => { editorKey[i].ans = opt; }); renderEditorGrid(); }
+        function bulkClear() { editorKey.forEach((_, i) => { editorKey[i].ans = null; }); renderEditorGrid(); }
+
+        // ── Sheet Generator ────────────────────────────────────────────────────
+        function initSheetPage() {
+            const sel = document.getElementById('sh-paper-sel');
+            sel.innerHTML = '<option value="">— Custom —</option>' +
+                papers.map(p => `<option value="${p.id}">${p.title}${p.subject ? ' (' + p.subject + ')' : ''}</option>`).join('');
+            buildSheet();
+        }
+        function openSheetFor(id) { showPage('sheet'); document.getElementById('sh-paper-sel').value = id; loadSheetFromPaper(); }
+        function loadSheetFromPaper() {
+            const id = document.getElementById('sh-paper-sel').value;
+            if (!id) { buildSheet(); return; }
+            const p = papers.find(x => x.id === id); if (!p) return;
+            document.getElementById('sh-title').value = p.title;
+            document.getElementById('sh-subject').value = p.subject || '';
+            document.getElementById('sh-count').value = p.key.length;
+            document.getElementById('sh-opts').value = p.nOpt;
+            document.getElementById('sh-cols').value = p.sheetCols || 2;
+            buildSheet();
+        }
+        function buildSheet() {
+            const n = Math.min(100, Math.max(5, parseInt(document.getElementById('sh-count').value) || 40));
+            const nOpt = parseInt(document.getElementById('sh-opts').value);
+            const cols = parseInt(document.getElementById('sh-cols').value);
+            const title = document.getElementById('sh-title').value || 'MCQ Examination';
+            const subject = document.getElementById('sh-subject').value || '';
+            const school = document.getElementById('sh-school').value || '';
+            const dur = document.getElementById('sh-duration').value || '';
+            const showKey = document.getElementById('sh-show-key').checked;
+            const opts = OPTS.slice(0, nOpt);
+            const paperId = document.getElementById('sh-paper-sel').value;
+            const paper = papers.find(x => x.id === paperId);
+            const key = paper?.key || [];
+            const perCol = Math.ceil(n / cols);
+            const barLines = Array.from({ length: 36 }, () => '<span></span>').join('');
+            const colsHtml = Array.from({ length: cols }, (_, ci) => {
+                const start = ci * perCol, end = Math.min(start + perCol, n);
+                return `<div style="flex:1;padding:0 6px;">${Array.from({ length: n }, (_, i) => {
+                    if (i < start || i >= end) return '';
+                    const ca = key[i]?.ans;
+                    return `<div style="display:flex;align-items:center;gap:5px;padding:3.5px 0;border-bottom:1px dotted #d1d5db;">
+        <span style="font-size:9.5px;font-weight:700;min-width:24px;text-align:right;">${i + 1}.</span>
+        ${opts.map(o => `<div style="width:21px;height:21px;border-radius:50%;border:1.5px solid ${showKey && ca === o ? '#10b981' : '#333'};
+          display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;
+          background:${showKey && ca === o ? '#10b981' : 'transparent'};color:${showKey && ca === o ? '#fff' : '#333'};">${o}</div>`).join('')}
+        ${showKey && ca ? `<span style="font-size:8px;color:#6b7280;">✓${ca}</span>` : ''}
+      </div>`;
+                }).join('')}</div>`;
+            }).join('<div style="width:1px;background:#e5e7eb;"></div>');
+            const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><style>*{margin:0;padding:0;box-sizing:border-box;}body{font-family:Arial,sans-serif;background:#fff;padding:11mm 13mm 9mm;}.bl{display:flex;gap:2px;align-items:flex-end;height:26px;}.bl span{background:#000;width:2px;}.bl span:nth-child(even){height:100%;}.bl span:nth-child(odd){height:70%;}.bl span:nth-child(3n){height:85%;width:3px;}.bl span:nth-child(5n){width:1px;}</style></head><body>
+  <div style="border:2.5px solid #1e1b4b;border-radius:6px;padding:10px 14px;margin-bottom:9px;">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;">
+      <div style="width:50px;height:50px;border:2px solid #1e1b4b;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:900;color:#1e1b4b;flex-shrink:0;">MCQ</div>
+      <div style="flex:1;"><div style="font-size:15px;font-weight:900;">${title.toUpperCase()}</div>
+        <div style="font-size:11px;color:#444;">${subject ? subject + ' — ' : ''}MULTIPLE CHOICE ANSWER SHEET${showKey ? ' — TEACHER COPY' : ''}</div>
+        ${school ? `<div style="font-size:10px;color:#666;">${school}</div>` : ''}</div>
+      <div style="text-align:center;"><div class="bl">${barLines}</div><div style="font-size:8px;letter-spacing:2px;margin-top:2px;">${String(Math.floor(Math.random() * 900000 + 100000))}</div>${dur ? `<div style="font-size:9px;color:#666;">⏱ ${dur}</div>` : ''}</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;">
+      ${['Student Name', 'Index / Reg. No.', 'Date', 'Class / Grade', 'Subject', 'Examiner'].map(l => `<div style="border-bottom:1.5px solid #333;padding:3px 0;"><div style="font-size:8.5px;text-transform:uppercase;color:#666;">${l}</div><div style="height:16px;"></div></div>`).join('')}
+    </div>
+  </div>
+  <div style="border:1.5px solid #1e1b4b;border-radius:4px;padding:5px 10px;margin-bottom:7px;background:#fffbeb;font-size:9.5px;">
+    <strong>INSTRUCTIONS:</strong> Use dark pen/pencil. Fully fill the bubble ●. Cross out ✗ wrong answers. ONE answer per question.
+    &nbsp;&nbsp;<span style="background:#1e1b4b;color:#fff;padding:1px 6px;border-radius:3px;font-size:8px;">HOW TO MARK:</span>&nbsp;
+    <span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#000;color:#fff;text-align:center;line-height:14px;font-size:8px;font-weight:700;">A</span> = Correct &nbsp;
+    <span style="color:red;font-weight:700;">✗</span> then fill new bubble = Changed answer
+  </div>
+  <div style="font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:1px;border-bottom:2px solid #1e1b4b;padding-bottom:3px;margin-bottom:7px;">ANSWER GRID — ${n} Questions / ${nOpt} Options${showKey ? ' (ANSWER KEY)' : ''}</div>
+  <div style="display:flex;gap:0;">${colsHtml}</div>
+  <div style="margin-top:11px;border:2px solid #1e1b4b;border-radius:6px;display:flex;overflow:hidden;">
+    ${['Total Qs', 'Correct', 'Wrong', 'Blank', 'Score', 'Grade', 'Checked By'].map((l, i) => `<div style="flex:1;padding:5px 7px;border-right:1.5px solid #1e1b4b;"><div style="font-size:8px;text-transform:uppercase;color:#666;">${l}</div><div style="height:16px;border-bottom:1px solid #333;font-weight:700;font-size:11px;">${i === 0 ? n : ''}</div></div>`).join('')}
+  </div>
+  <div style="margin-top:6px;display:flex;justify-content:space-between;font-size:8px;color:#999;border-top:1px solid #ddd;padding-top:4px;">
+    <span>MCQ Answer Checker</span><span>${title}</span><span>${n} Questions | ${opts.join(' ')}</span>
+  </div></body></html>`;
+            document.getElementById('sheet-preview-wrap').innerHTML =
+                `<iframe srcdoc="${html.replace(/"/g, '&quot;')}" style="width:100%;height:660px;border:none;border-radius:10px;"></iframe>`;
+        }
+        function printSheet() {
+            const frame = document.querySelector('#sheet-preview-wrap iframe');
+            if (!frame) { toast('Generate preview first!', 'warn'); return; }
+            const pw = window.open('', '_blank');
+            pw.document.write(frame.srcdoc);
+            pw.document.close();
+            pw.onload = () => { pw.focus(); pw.print(); };
+        }
+
+        // ── Checker Init ───────────────────────────────────────────────────────
+        function initCheckerPage() {
+            const sel = document.getElementById('chk-paper-sel');
+            sel.innerHTML = '<option value="">-- Choose a paper --</option>' +
+                papers.map(p => `<option value="${p.id}">${p.title}${p.subject ? ' (' + p.subject + ')' : ''}</option>`).join('');
+            document.getElementById('checker-grid').innerHTML = `<div class="text-center text-muted py-4"><i class="bi bi-arrow-up-circle fs-2"></i><p class="mt-2">Select a paper to begin</p></div>`;
+            document.getElementById('chk-paper-info').classList.add('d-none');
+            resetDetectionState();
+        }
+        function openCheckerFor(id) {
+            showPage('checker');
+            document.getElementById('chk-paper-sel').value = id;
+            loadCheckerPaper();
+        }
+        function loadCheckerPaper() {
+            const id = document.getElementById('chk-paper-sel').value;
+            if (!id) { document.getElementById('checker-grid').innerHTML = ''; return; }
+            const p = papers.find(x => x.id === id); if (!p) return;
+            checkerKey = JSON.parse(JSON.stringify(p.key));
+            studentAns = Array(checkerKey.length).fill(null);
+            document.getElementById('chk-cols').value = p.sheetCols || 2;
+            const info = document.getElementById('chk-paper-info');
+            info.textContent = `${p.title} • ${p.key.length} Qs`;
+            info.classList.remove('d-none');
+            buildCheckerGrid(p.nOpt);
+            updateAnsCount();
+        }
+        function buildCheckerGrid(nOpt) {
+            nOpt = nOpt || 4;
+            const g = document.getElementById('checker-grid');
+            if (!checkerKey.length) { g.innerHTML = ''; return; }
+            g.innerHTML = checkerKey.map((q, i) => `
     <div class="q-row" id="qrow-${i}">
-      <span class="fw-bold text-muted" style="min-width:30px;font-size:14px;">Q${q.q}</span>
-      ${OPTS.slice(0, 5).map(o => `
-        <button class="ans-btn" id="sb-${i}-${o}" onclick="pickAnswer(${i},'${o}')">${o}</button>
-      `).join('')}
+      <span class="fw-bold text-muted" style="min-width:26px;font-size:12px;">Q${q.q}</span>
+      ${OPTS.slice(0, nOpt).map(o => `<button class="ans-btn" id="sb-${i}-${o}" onclick="pickAnswer(${i},'${o}')">${o}</button>`).join('')}
       <span class="ms-auto small fw-bold" id="qmark-${i}"></span>
     </div>`).join('');
         }
-
         function pickAnswer(qi, opt) {
-            // Toggle off if already selected
-            if (studentAnswers[qi] === opt) {
-                studentAnswers[qi] = null;
-            } else {
-                studentAnswers[qi] = opt;
-            }
-            // Refresh button styles for that row
-            OPTS.forEach(o => {
-                const btn = document.getElementById(`sb-${qi}-${o}`);
-                if (!btn) return;
-                btn.className = 'ans-btn' + (studentAnswers[qi] === o ? ' sel' : '');
-            });
+            studentAns[qi] = studentAns[qi] === opt ? null : opt;
+            refreshQRow(qi);
+            updateAnsCount();
+            if (hitAreas.length) redrawCanvas(); // update image overlay
         }
-
+        function refreshQRow(qi) {
+            const id = document.getElementById('chk-paper-sel').value;
+            const p = papers.find(x => x.id === id);
+            const nOpt = p?.nOpt || 4;
+            OPTS.slice(0, nOpt).forEach(o => {
+                const btn = document.getElementById(`sb-${qi}-${o}`);
+                if (btn) btn.className = 'ans-btn' + (studentAns[qi] === o ? ' sel' : '');
+            });
+            document.getElementById(`qmark-${qi}`).innerHTML = '';
+            document.getElementById(`qrow-${qi}`).className = 'q-row';
+        }
+        function updateAnsCount() {
+            const filled = studentAns.filter(a => a !== null).length;
+            document.getElementById('ans-count').textContent = `${filled}/${checkerKey.length}`;
+        }
         function checkAnswers() {
-            if (!answerKey.length) { toast('No answer key loaded!', 'warn'); return; }
+            if (!checkerKey.length) { toast('Select a paper first!', 'warn'); return; }
+            const id = document.getElementById('chk-paper-sel').value;
+            const p = papers.find(x => x.id === id);
+            const nOpt = p?.nOpt || 4;
             let correct = 0, wrong = 0, blank = 0;
-
-            answerKey.forEach((q, i) => {
-                const sa = studentAnswers[i];
+            checkerKey.forEach((q, i) => {
+                const sa = studentAns[i];
                 const row = document.getElementById(`qrow-${i}`);
                 const mark = document.getElementById(`qmark-${i}`);
-
-                // Style every button for this row
-                OPTS.forEach(o => {
-                    const btn = document.getElementById(`sb-${i}-${o}`);
-                    if (!btn) return;
-                    if (o === q.ans && o === sa) btn.className = 'ans-btn ok';   // correct pick
-                    else if (o === sa && sa !== q.ans) btn.className = 'ans-btn bad';  // wrong pick
-                    else if (o === q.ans && !sa) btn.className = 'ans-btn miss'; // missed correct
+                OPTS.slice(0, nOpt).forEach(o => {
+                    const btn = document.getElementById(`sb-${i}-${o}`); if (!btn) return;
+                    if (o === q.ans && o === sa) btn.className = 'ans-btn ok';
+                    else if (o === sa && sa !== q.ans) btn.className = 'ans-btn bad';
+                    else if (o === q.ans && !sa) btn.className = 'ans-btn miss';
                     else btn.className = 'ans-btn';
                 });
-
-                if (!sa) {
-                    row.className = 'q-row bad';
-                    mark.innerHTML = `<span class="text-warning">— (${q.ans})</span>`;
-                    blank++;
-                } else if (sa === q.ans) {
-                    row.className = 'q-row ok';
-                    mark.innerHTML = `<i class="bi bi-check-circle-fill text-success"></i>`;
-                    correct++;
-                } else {
-                    row.className = 'q-row bad';
-                    mark.innerHTML = `<span class="text-danger">${sa} ≠ ${q.ans}</span>`;
-                    wrong++;
-                }
+                if (!sa) { row.className = 'q-row bad'; mark.innerHTML = `<span class="text-warning small">—(${q.ans})</span>`; blank++; }
+                else if (sa === q.ans) { row.className = 'q-row ok'; mark.innerHTML = `<i class="bi bi-check-circle-fill text-success"></i>`; correct++; }
+                else { row.className = 'q-row bad'; mark.innerHTML = `<span class="text-danger small">${sa}≠${q.ans}</span>`; wrong++; }
             });
-
-            const total = answerKey.length;
-            const pct = Math.round(correct / total * 100);
-            toast(`✅ ${correct}/${total} correct (${pct}%)  ❌ ${wrong} wrong  ⬜ ${blank} blank`,
-                pct >= 50 ? 'ok' : 'bad', 5000);
+            const total = checkerKey.length, pct = Math.round(correct / total * 100);
+            toast(`✅ ${correct}/${total} (${pct}%)  ❌ ${wrong} wrong  ⬜ ${blank} blank`, pct >= 50 ? 'ok' : 'bad', 5000);
         }
-
         function resetChecker() {
-            buildCheckerGrid();
+            studentAns = Array(checkerKey.length).fill(null);
             document.getElementById('inp-student').value = '';
+            const id = document.getElementById('chk-paper-sel').value;
+            const p = papers.find(x => x.id === id);
+            buildCheckerGrid(p?.nOpt || 4);
+            resetDetectionState();
+            updateAnsCount();
         }
-
         function saveResult() {
+            if (!checkerKey.length) { toast('Select a paper first!', 'warn'); return; }
             checkAnswers();
-            const total = answerKey.length;
-            const correct = answerKey.filter((q, i) => studentAnswers[i] === q.ans).length;
+            const id = document.getElementById('chk-paper-sel').value;
+            const p = papers.find(x => x.id === id);
+            const total = checkerKey.length;
+            const correct = checkerKey.filter((q, i) => studentAns[i] === q.ans).length;
             const name = document.getElementById('inp-student').value.trim() || 'Anonymous';
-            savedResults.unshift({
-                id: Date.now(),
-                name,
-                paper: localStorage.getItem('mcq_title') || 'MCQ Exam',
-                correct, total,
-                pct: Math.round(correct / total * 100),
-                answers: [...studentAnswers],
-                key: JSON.parse(JSON.stringify(answerKey)),
-                date: new Date().toLocaleString()
+            results.unshift({
+                id: Date.now(), paperId: id, paperTitle: p?.title || 'Unknown', name, correct, total,
+                pct: Math.round(correct / total * 100), answers: [...studentAns], key: JSON.parse(JSON.stringify(checkerKey)), date: new Date().toLocaleString()
             });
-            localStorage.setItem('mcq_results', JSON.stringify(savedResults));
+            localStorage.setItem('mcq_results2', JSON.stringify(results));
             toast(`Result saved for ${name}!`, 'ok');
         }
 
         // ── Camera ─────────────────────────────────────────────────────────────
-        async function toggleCamera() {
-            if (camOn) {
-                stopCamera();
-            } else {
-                await startCamera();
-            }
-        }
-
+        async function toggleCamera() { camOn ? stopCamera() : await startCamera(); }
         async function startCamera() {
             try {
-                stream = await navigator.mediaDevices.getUserMedia({
-                    video: { facingMode: 'environment', width: { ideal: 1280 }, height: { ideal: 720 } }
-                });
+                stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment', width: { ideal: 1280 }, height: { ideal: 720 } } });
                 const vid = document.getElementById('videoEl');
-                vid.srcObject = stream;
-                vid.style.display = 'block';
+                vid.srcObject = stream; vid.style.display = 'block';
                 document.getElementById('canvasEl').style.display = 'none';
-                document.getElementById('cam-placeholder').style.display = 'none';
-                document.getElementById('btn-cam').innerHTML = '<i class="bi bi-camera-video-off me-1"></i>Stop Camera';
-                document.getElementById('btn-cam').className = 'btn btn-danger flex-grow-1';
+                document.getElementById('cam-ph').style.display = 'none';
+                document.getElementById('btn-cam').innerHTML = '<i class="bi bi-camera-video-off me-1"></i>Stop';
+                document.getElementById('btn-cam').className = 'btn btn-danger';
+                document.getElementById('btn-snap').classList.remove('d-none');
+                document.getElementById('btn-draw').classList.add('d-none');
+                document.getElementById('btn-retake').classList.add('d-none');
+                setHint('Point camera at the filled answer sheet then click Snapshot');
                 camOn = true;
-            } catch (e) {
-                toast('Camera access denied or unavailable', 'bad');
-            }
+            } catch (e) { toast('Camera access denied', 'bad'); }
         }
-
         function stopCamera() {
             if (stream) { stream.getTracks().forEach(t => t.stop()); stream = null; }
             document.getElementById('videoEl').style.display = 'none';
-            document.getElementById('cam-placeholder').style.display = 'flex';
+            document.getElementById('cam-ph').style.display = 'flex';
             document.getElementById('btn-cam').innerHTML = '<i class="bi bi-camera-video me-1"></i>Start Camera';
-            document.getElementById('btn-cam').className = 'btn btn-primary flex-grow-1';
-            camOn = false;
+            document.getElementById('btn-cam').className = 'btn btn-primary';
+            document.getElementById('btn-snap').classList.add('d-none');
+            clearHint(); camOn = false;
         }
-
         function takeSnapshot() {
             const vid = document.getElementById('videoEl');
-            if (!camOn) { toast('Start the camera first!', 'warn'); return; }
+            if (!camOn) { toast('Start camera first!', 'warn'); return; }
             const cv = document.getElementById('canvasEl');
             cv.width = vid.videoWidth;
             cv.height = vid.videoHeight;
-            cv.getContext('2d').drawImage(vid, 0, 0);
+            const ctx = cv.getContext('2d');
+            ctx.drawImage(vid, 0, 0);
+            origImgData = ctx.getImageData(0, 0, cv.width, cv.height); // save original pixels
             vid.style.display = 'none';
             cv.style.display = 'block';
             stopCamera();
-            toast('Snapshot captured! Mark the answers below.', 'ok');
+            // Show draw + retake buttons
+            document.getElementById('btn-draw').classList.remove('d-none');
+            document.getElementById('btn-retake').classList.remove('d-none');
+            document.getElementById('btn-snap').classList.add('d-none');
+            initCanvasListeners(cv);
+            setStep(2);
+            setHint('Click "Select Grid", then draw a rectangle around all the answer bubbles');
+            toast('Snapshot taken! Now click "Select Grid" and draw around the bubble area', 'ok', 4000);
+        }
+        function retakeSnapshot() {
+            document.getElementById('canvasEl').style.display = 'none';
+            document.getElementById('cam-ph').style.display = 'flex';
+            document.getElementById('btn-draw').classList.add('d-none');
+            document.getElementById('btn-retake').classList.add('d-none');
+            resetDetectionState();
+            setStep(1);
+            startCamera();
+        }
+
+        // ── Canvas Detection ───────────────────────────────────────────────────
+        function initCanvasListeners(cv) {
+            // Remove old listeners by cloning
+            const newCv = cv.cloneNode(true);
+            cv.parentNode.replaceChild(newCv, cv);
+            const c = document.getElementById('canvasEl');
+            c.style.display = 'block';
+
+            // Mouse
+            c.addEventListener('mousedown', e => {
+                if (!drawMode) { handleCanvasClick(e); return; }
+                const [mx, my] = canvasPos(c, e.clientX, e.clientY);
+                selStart = { x: mx, y: my }; isDrawing = true;
+            });
+            c.addEventListener('mousemove', e => {
+                if (!drawMode || !isDrawing) return;
+                const [mx, my] = canvasPos(c, e.clientX, e.clientY);
+                selEnd = { x: mx, y: my }; redrawCanvas();
+            });
+            c.addEventListener('mouseup', e => {
+                if (!drawMode || !isDrawing) return;
+                const [mx, my] = canvasPos(c, e.clientX, e.clientY);
+                selEnd = { x: mx, y: my }; isDrawing = false;
+                finalizeSelection();
+            });
+            // Touch
+            c.addEventListener('touchstart', e => {
+                e.preventDefault();
+                const t = e.touches[0];
+                if (!drawMode) { handleCanvasTouchClick(c, t); return; }
+                const [mx, my] = canvasPos(c, t.clientX, t.clientY);
+                selStart = { x: mx, y: my }; isDrawing = true;
+            }, { passive: false });
+            c.addEventListener('touchmove', e => {
+                e.preventDefault();
+                if (!drawMode || !isDrawing) return;
+                const t = e.touches[0];
+                const [mx, my] = canvasPos(c, t.clientX, t.clientY);
+                selEnd = { x: mx, y: my }; redrawCanvas();
+            }, { passive: false });
+            c.addEventListener('touchend', e => {
+                e.preventDefault();
+                if (!drawMode || !isDrawing) return;
+                isDrawing = false;
+                finalizeSelection();
+            }, { passive: false });
+        }
+
+        function canvasPos(cv, clientX, clientY) {
+            const r = cv.getBoundingClientRect();
+            const sx = cv.width / r.width;
+            const sy = cv.height / r.height;
+            return [(clientX - r.left) * sx, (clientY - r.top) * sy];
+        }
+
+        function toggleDrawMode() {
+            drawMode = !drawMode;
+            const cv = document.getElementById('canvasEl');
+            const btn = document.getElementById('btn-draw');
+            cv.style.cursor = drawMode ? 'crosshair' : 'default';
+            if (drawMode) {
+                btn.innerHTML = '<i class="bi bi-x-circle me-1"></i>Cancel';
+                btn.className = 'btn btn-warning';
+                setHint('Drag to draw a rectangle around the entire bubble grid area');
+            } else {
+                btn.innerHTML = '<i class="bi bi-bounding-box me-1"></i>Select Grid';
+                btn.className = 'btn btn-outline-info';
+                clearHint();
+            }
+        }
+
+        function finalizeSelection() {
+            if (!selStart || !selEnd) return;
+            drawMode = false;
+            document.getElementById('canvasEl').style.cursor = 'pointer';
+            document.getElementById('btn-draw').innerHTML = '<i class="bi bi-bounding-box me-1"></i>Re-select';
+            document.getElementById('btn-draw').className = 'btn btn-outline-info';
+
+            const x = Math.min(selStart.x, selEnd.x);
+            const y = Math.min(selStart.y, selEnd.y);
+            const w = Math.abs(selEnd.x - selStart.x);
+            const h = Math.abs(selEnd.y - selStart.y);
+            if (w < 20 || h < 20) { toast('Selection too small – try again', 'warn'); return; }
+            lastSelArea = { x, y, w, h };
+            initHitAreas(x, y, w, h);
+            runAutoDetect();
+            setStep(3);
+            setHint('Click any bubble on the image to fix detection errors');
+        }
+
+        function initHitAreas(x, y, w, h) {
+            if (!checkerKey.length) return;
+            const numCols = parseInt(document.getElementById('chk-cols').value) || 2;
+            const numQ = checkerKey.length;
+            const nOpt = papers.find(p => p.id === document.getElementById('chk-paper-sel').value)?.nOpt || 4;
+            const perCol = Math.ceil(numQ / numCols);
+            const colW = w / numCols;
+
+            hitAreas = [];
+            for (let ci = 0; ci < numCols; ci++) {
+                const colX = x + ci * colW;
+                const qInCol = Math.min(perCol, numQ - ci * perCol);
+                const rowH = h / perCol;
+                for (let ri = 0; ri < qInCol; ri++) {
+                    const qi = ci * perCol + ri;
+                    if (qi >= numQ) break;
+                    const rowY = y + ri * rowH;
+                    const bubbleX = colX + colW * 0.18;
+                    const bubbleW = (colW * 0.82) / nOpt;
+                    OPTS.slice(0, nOpt).forEach((opt, oi) => {
+                        hitAreas.push({
+                            qi, opt,
+                            cx: bubbleX + (oi + 0.5) * bubbleW,
+                            cy: rowY + rowH * 0.5,
+                            r: Math.min(bubbleW, rowH) * 0.38
+                        });
+                    });
+                }
+            }
+        }
+
+        function handleCanvasClick(e) {
+            if (!hitAreas.length) return;
+            const cv = document.getElementById('canvasEl');
+            const [mx, my] = canvasPos(cv, e.clientX, e.clientY);
+            selectNearestBubble(mx, my);
+        }
+        function handleCanvasTouchClick(cv, t) {
+            if (!hitAreas.length) return;
+            const [mx, my] = canvasPos(cv, t.clientX, t.clientY);
+            selectNearestBubble(mx, my);
+        }
+        function selectNearestBubble(mx, my) {
+            let nearest = null, minDist = Infinity;
+            hitAreas.forEach(ha => {
+                const d = Math.sqrt((mx - ha.cx) ** 2 + (my - ha.cy) ** 2);
+                if (d < minDist && d < ha.r * 2.2) { minDist = d; nearest = ha; }
+            });
+            if (!nearest) return;
+            studentAns[nearest.qi] = studentAns[nearest.qi] === nearest.opt ? null : nearest.opt;
+            refreshQRow(nearest.qi);
+            updateAnsCount();
+            redrawCanvas();
+        }
+
+        function redrawCanvas() {
+            const cv = document.getElementById('canvasEl');
+            const ctx = cv.getContext('2d');
+            if (!origImgData) return;
+            ctx.putImageData(origImgData, 0, 0); // restore clean snapshot
+
+            // Draw selection rectangle
+            if (lastSelArea) {
+                const { x, y, w, h } = lastSelArea;
+                ctx.strokeStyle = 'rgba(79,70,229,0.5)';
+                ctx.lineWidth = 2;
+                ctx.setLineDash([6, 3]);
+                ctx.strokeRect(x, y, w, h);
+                ctx.setLineDash([]);
+            }
+            // Draw in-progress selection
+            if (drawMode && selStart && selEnd) {
+                ctx.strokeStyle = '#4f46e5';
+                ctx.lineWidth = 2.5;
+                ctx.setLineDash([8, 4]);
+                const sx = selStart.x, sy = selStart.y;
+                const sw = selEnd.x - sx, sh = selEnd.y - sy;
+                ctx.fillStyle = 'rgba(79,70,229,0.08)';
+                ctx.fillRect(sx, sy, sw, sh);
+                ctx.strokeRect(sx, sy, sw, sh);
+                ctx.setLineDash([]);
+                return;
+            }
+            // Draw hit-area bubbles
+            hitAreas.forEach(ha => {
+                const sel = studentAns[ha.qi] === ha.opt;
+                ctx.beginPath();
+                ctx.arc(ha.cx, ha.cy, ha.r, 0, Math.PI * 2);
+                if (sel) {
+                    ctx.fillStyle = 'rgba(79,70,229,0.55)';
+                    ctx.fill();
+                    ctx.strokeStyle = '#4f46e5';
+                    ctx.lineWidth = 2.5;
+                } else {
+                    ctx.strokeStyle = 'rgba(79,70,229,0.25)';
+                    ctx.lineWidth = 1.5;
+                }
+                ctx.stroke();
+                // Label
+                ctx.fillStyle = sel ? '#fff' : 'rgba(0,0,0,0.35)';
+                ctx.font = `bold ${Math.max(8, ha.r * 0.9)}px Arial`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(ha.opt, ha.cx, ha.cy);
+            });
+        }
+
+        function runAutoDetect() {
+            if (!lastSelArea || !checkerKey.length) return;
+            const { x, y, w, h } = lastSelArea;
+            const cv = document.getElementById('canvasEl');
+            const ctx = cv.getContext('2d');
+            const numCols = parseInt(document.getElementById('chk-cols').value) || 2;
+            const numQ = checkerKey.length;
+            const nOpt = papers.find(p => p.id === document.getElementById('chk-paper-sel').value)?.nOpt || 4;
+            const perCol = Math.ceil(numQ / numCols);
+            const colW = w / numCols;
+            const thresh = parseInt(document.getElementById('det-thresh').value) || 128;
+            let detected = 0;
+
+            for (let ci = 0; ci < numCols; ci++) {
+                const colX = x + ci * colW;
+                const qInCol = Math.min(perCol, numQ - ci * perCol);
+                const rowH = h / perCol;
+                for (let ri = 0; ri < qInCol; ri++) {
+                    const qi = ci * perCol + ri;
+                    if (qi >= numQ) break;
+                    const rowY = y + ri * rowH;
+                    const bubbleX = colX + colW * 0.18;
+                    const bubbleW = (colW * 0.82) / nOpt;
+                    let minBright = 256, bestOpt = null;
+                    for (let oi = 0; oi < nOpt; oi++) {
+                        const bx = Math.round(bubbleX + oi * bubbleW + bubbleW * 0.15);
+                        const by = Math.round(rowY + rowH * 0.15);
+                        const bw = Math.max(2, Math.round(bubbleW * 0.7));
+                        const bh = Math.max(2, Math.round(rowH * 0.7));
+                        try {
+                            const data = ctx.getImageData(bx, by, bw, bh).data;
+                            const bright = avgBright(data);
+                            if (bright < minBright) { minBright = bright; bestOpt = OPTS[oi]; }
+                        } catch (e) { }
+                    }
+                    studentAns[qi] = (minBright < thresh) ? bestOpt : null;
+                    if (studentAns[qi]) detected++;
+                    refreshQRow(qi);
+                }
+            }
+
+            updateAnsCount();
+            redrawCanvas();
+            showDetectStats(detected, numQ);
+            setStep(4);
+            toast(`Auto-detected ${detected} / ${numQ} answers`, 'ok');
+        }
+
+        function avgBright(data) {
+            let s = 0;
+            for (let i = 0; i < data.length; i += 4) s += (data[i] + data[i + 1] + data[i + 2]) / 3;
+            return s / (data.length / 4);
+        }
+
+        function showDetectStats(detected, total) {
+            const blank = total - detected;
+            document.getElementById('detect-panel').style.display = 'block';
+            document.getElementById('detect-stats').innerHTML = `
+    <div class="col-4"><div class="stat-box"><div class="num text-success">${detected}</div><div class="small text-muted">Detected</div></div></div>
+    <div class="col-4"><div class="stat-box"><div class="num text-warning">${blank}</div><div class="small text-muted">Blank</div></div></div>
+    <div class="col-4"><div class="stat-box"><div class="num text-primary">${total}</div><div class="small text-muted">Total</div></div></div>`;
+        }
+
+        function resetDetectionState() {
+            hitAreas = []; origImgData = null; lastSelArea = null;
+            selStart = selEnd = null; drawMode = false; isDrawing = false;
+            document.getElementById('detect-panel').style.display = 'none';
+            document.getElementById('btn-draw').classList.add('d-none');
+            document.getElementById('btn-retake').classList.add('d-none');
+            document.getElementById('btn-snap').classList.add('d-none');
+            document.getElementById('btn-cam').innerHTML = '<i class="bi bi-camera-video me-1"></i>Start Camera';
+            document.getElementById('btn-cam').className = 'btn btn-primary';
+            document.getElementById('canvasEl').style.display = 'none';
+            document.getElementById('cam-ph').style.display = 'flex';
+            clearHint(); setStep(1);
+        }
+
+        // ── Step indicator ─────────────────────────────────────────────────────
+        function setStep(n) {
+            const ids = ['step1-badge', 'step2-badge', 'step3-badge', 'step4-badge'];
+            ids.forEach((id, i) => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                el.className = 'badge ' + (i + 1 < n ? 'bg-success' : i + 1 === n ? 'bg-primary' : 'bg-secondary');
+            });
+        }
+        function setHint(msg) {
+            const h = document.getElementById('cam-hint');
+            h.textContent = msg; h.style.display = 'block';
+        }
+        function clearHint() {
+            document.getElementById('cam-hint').style.display = 'none';
         }
 
         // ── Results ────────────────────────────────────────────────────────────
         function buildResults() {
-            savedResults = JSON.parse(localStorage.getItem('mcq_results') || '[]');
+            results = JSON.parse(localStorage.getItem('mcq_results2') || '[]');
+            const rf = document.getElementById('res-filter');
+            const cur = rf.value;
+            rf.innerHTML = '<option value="">All Papers</option>' + papers.map(p => `<option value="${p.id}">${p.title}</option>`).join('');
+            rf.value = cur;
+            const filtered = cur ? results.filter(r => r.paperId === cur) : results;
             const c = document.getElementById('results-list');
-            if (!savedResults.length) {
-                c.innerHTML = `<div class="card-box text-center text-muted py-5">
-      <i class="bi bi-inbox fs-1"></i><p class="mt-3">No results yet.</p></div>`;
-                return;
+            if (!filtered.length) {
+                c.innerHTML = `<div class="card-box text-center text-muted py-5"><i class="bi bi-inbox fs-1"></i><p class="mt-3">No results yet.</p></div>`; return;
             }
-            c.innerHTML = savedResults.map((r, idx) => {
+            c.innerHTML = filtered.map((r, idx) => {
                 const col = r.pct >= 75 ? '#10b981' : r.pct >= 50 ? '#f59e0b' : '#ef4444';
                 const grade = r.pct >= 75 ? 'Pass' : r.pct >= 50 ? 'Average' : 'Fail';
-                return `
-    <div class="card-box mb-3">
-      <div class="d-flex align-items-center gap-4 flex-wrap">
+                return `<div class="card-box mb-3">
+      <div class="d-flex align-items-center gap-3 flex-wrap">
         <div class="score-ring" style="border-color:${col};color:${col};">
-          <span style="font-size:1.7rem;font-weight:800;">${r.pct}%</span>
-          <small style="font-size:11px;">${grade}</small>
+          <span style="font-size:1.6rem;font-weight:800;">${r.pct}%</span>
+          <small style="font-size:10px;">${grade}</small>
         </div>
         <div class="flex-grow-1">
           <h5 class="fw-bold mb-1">${r.name}</h5>
-          <div class="text-muted small mb-2">${r.paper} &bull; ${r.date}</div>
+          <div class="text-muted small mb-2"><span class="badge bg-primary me-1">${r.paperTitle}</span>${r.date}</div>
           <div class="d-flex gap-2 flex-wrap mb-2">
             <span class="badge bg-success">${r.correct} Correct</span>
             <span class="badge bg-danger">${r.total - r.correct} Wrong</span>
             <span class="badge bg-secondary">${r.total} Total</span>
           </div>
-          <div class="progress" style="height:7px;">
-            <div class="progress-bar" style="width:${r.pct}%;background:${col};"></div>
-          </div>
+          <div class="progress" style="height:6px;"><div class="progress-bar" style="width:${r.pct}%;background:${col};"></div></div>
         </div>
-        <button class="btn btn-sm btn-outline-primary" onclick="toggleDetail(${idx})">
-          <i class="bi bi-eye me-1"></i>Detail
-        </button>
+        <button class="btn btn-sm btn-outline-primary" onclick="toggleDetail(${idx})"><i class="bi bi-eye me-1"></i>Detail</button>
       </div>
       <div id="det-${idx}" style="display:none;" class="mt-3 pt-3 border-top">
         <div class="d-flex flex-wrap gap-2">
           ${r.key.map((q, i) => {
-                    const sa = r.answers[i];
-                    const ok = sa === q.ans;
-                    return `<div class="text-center" style="min-width:52px;">
-              <div class="small text-muted">Q${q.q}</div>
-              <div style="width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;
-                   font-weight:700;font-size:13px;margin:2px auto;
-                   background:${ok ? '#10b981' : '#ef4444'};color:#fff;">${sa || '—'}</div>
-              <div class="small ${ok ? 'text-success' : 'text-danger'}">${ok ? '✓' : q.ans}</div>
-            </div>`;
+                    const sa = r.answers[i], ok = sa === q.ans; return `<div class="text-center" style="min-width:46px;">
+            <div class="small text-muted">Q${q.q}</div>
+            <div style="width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;margin:2px auto;background:${ok ? '#10b981' : '#ef4444'};color:#fff;">${sa || '—'}</div>
+            <div class="small ${ok ? 'text-success' : 'text-danger'}">${ok ? '✓' : q.ans}</div>
+          </div>`;
                 }).join('')}
         </div>
       </div>
     </div>`;
             }).join('');
         }
-
-        function toggleDetail(idx) {
-            const d = document.getElementById(`det-${idx}`);
-            d.style.display = d.style.display === 'none' ? 'block' : 'none';
-        }
-
-        function clearResults() {
-            if (!confirm('Delete all results?')) return;
-            savedResults = [];
-            localStorage.removeItem('mcq_results');
-            buildResults();
-            toast('All results cleared', 'info');
-        }
+        function toggleDetail(idx) { const d = document.getElementById(`det-${idx}`); d.style.display = d.style.display === 'none' ? 'block' : 'none'; }
+        function clearResults() { if (!confirm('Delete all?')) return; results = []; localStorage.removeItem('mcq_results2'); buildResults(); toast('Cleared', 'info'); }
 
         // ── Toast ──────────────────────────────────────────────────────────────
         function toast(msg, type = 'info', dur = 3200) {
             const colors = { ok: '#10b981', bad: '#ef4444', warn: '#f59e0b', info: '#6366f1' };
             const el = document.createElement('div');
-            el.className = 'toast-item';
-            el.style.background = colors[type] || '#333';
-            el.textContent = msg;
+            el.className = 'toast-item'; el.style.background = colors[type] || '#333'; el.textContent = msg;
             document.getElementById('toastWrap').appendChild(el);
             setTimeout(() => el.remove(), dur);
         }
 
         // ── Init ───────────────────────────────────────────────────────────────
-        (function init() {
-            if (answerKey.length) {
-                document.getElementById('inp-title').value = localStorage.getItem('mcq_title') || 'MCQ Exam';
-                document.getElementById('inp-count').value = answerKey.length;
-                renderAdminGrid();
-                toast(`Loaded saved key: ${answerKey.length} questions`, 'info');
-            } else {
-                generateAdminGrid();
-            }
-        })();
+        buildPapersList();
     </script>
 </body>
 
